@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <!--
+    KONYA TAKSİ – FULL RESPONSIVE, MODERN, ŞIK, SADE HTML + CSS TEK SAYFA
+    Notlar:
+    - React/JS yok. Tamamen HTML + CSS (progressive enhancement mantığıyla).
+    - Renk paleti: Sarı (#FFC400), Siyah (#111111), Beyaz (#ffffff), Gri tonları.
+    - Ulaşım odaklı güçlü CTA: Hemen Ara (tel:), WhatsApp (wa.me).
+    - Fotoğraflar URL ile kolay eklenebilir (galeri kartlarını çoğaltın).
+    - Erişilebilirlik, responsive grid, performans optimizasyonları (lazyload, modern meta vs.).
+    - UI/UX: güçlü tipografi, yumuşak gölgeler, büyük radius, net kontrast.
+  -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Konya Taksi | Hızlı, Güvenli, 7/24</title>
+  <meta name="description" content="Konya Taksi – Konya'da 7/24 hızlı, güvenli, konforlu taksi. Tek tıkla ara veya WhatsApp'tan yaz!" />
+  <meta name="theme-color" content="#FFC400" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <!-- Open Graph / Social -->
+  <meta property="og:title" content="Konya Taksi | Hızlı, Güvenli, 7/24" />
+  <meta property="og:description" content="Tek tıkla ara veya WhatsApp’tan yaz. Şehir içi & şehirler arası transfer." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1518306727298-4c7b19d4327a?q=80&w=1200&auto=format&fit=crop" />
+  <meta property="og:locale" content="tr_TR" />
+  <style>
+    /* =====================================================================
+       KÖK DEĞİŞKENLER, RESET, ERİŞİLEBİLİRLİK, TİPOGRAFİ
+       ===================================================================== */
+    :root {
+      /* Renkler */
+      --yellow: #FFC400;          /* Ana sarı */
+      --yellow-2: #ffb300;        /* Hover sarı */
+      --black: #111111;           /* Ana siyah */
+      --dark: #1a1a1a;            /* Koyu arka plan */
+      --white: #ffffff;           /* Beyaz */
+      --gray-0: #fafafa;
+      --gray-1: #f5f5f7;
+      --gray-2: #ececf0;
+      --gray-3: #d9d9df;
+      --gray-4: #b9bac1;
+      --gray-5: #8b8d95;
+
+      /* Radius & Gölge */
+      --r-lg: 18px;
+      --r-xl: 22px;
+      --r-2xl: 28px;
+      --shadow-1: 0 10px 24px rgba(0,0,0,.12);
+      --shadow-2: 0 22px 48px rgba(0,0,0,.16);
+      --maxw: 1160px;
+
+      /* Tipografi */
+      --ff: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      --fs-300: clamp(.92rem, .9vw, 1rem);
+      --fs-400: clamp(1rem, 1.1vw, 1.1rem);
+      --fs-500: clamp(1.05rem, 1.4vw, 1.2rem);
+      --fs-600: clamp(1.2rem, 2.2vw, 1.6rem);
+      --fs-700: clamp(1.6rem, 4.2vw, 2.4rem);
+      --fs-800: clamp(2rem, 5.6vw, 3.2rem);
+    }
+    *, *::before, *::after { box-sizing: border-box }
+    html, body { height: 100% }
+    body {
+      margin: 0;
+      font-family: var(--ff);
+      color: var(--black);
+      background:
+        radial-gradient(1200px 800px at 100% -10%, rgba(255,196,0,.12), transparent 60%),
+        radial-gradient(800px 600px at -10% 20%, rgba(0,0,0,.06), transparent 60%),
+        var(--white);
+      line-height: 1.55;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    img { max-width: 100%; display: block }
+    a { color: inherit }
+    :focus-visible { outline: 3px solid var(--yellow); outline-offset: 2px }
+
+    /* Hareket hassasiyeti desteği */
+    @media (prefers-reduced-motion: reduce) {
+      * { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important }
+    }
+
+    /* =====================================================================
+       YARDIMCI SINIFLAR (utilities) – minimalist
+       ===================================================================== */
+    .container { max-width: var(--maxw); margin-inline: auto; padding-inline: 20px }
+    .grid { display: grid; gap: 20px }
+    .center { display: grid; place-items: center }
+    .hidden { display: none !important }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0 }
+    .muted { color: #444 }
+    .badge { display:inline-flex; align-items:center; gap:8px; font-size:var(--fs-300); padding:8px 12px; border-radius:999px; border:1px solid var(--black); background: var(--white); box-shadow: var(--shadow-1) }
+    .btn { appearance:none; border:none; cursor:pointer; text-decoration:none; font-weight:800; letter-spacing:.2px; padding: 12px 16px; border-radius: 16px; transition: transform .06s ease, box-shadow .2s ease, background .2s ease }
+    .btn:active { transform: translateY(1px) }
+    .btn.yellow { background: var(--yellow); color: #111; box-shadow: var(--shadow-1) }
+    .btn.yellow:hover { background: var(--yellow-2) }
+    .btn.outline { background: transparent; border: 2px solid var(--black); color: var(--black) }
+    .btn.outline:hover { background: var(--black); color: var(--white) }
+
+    /* =====================================================================
+       ÜST BAR / NAV
+       ===================================================================== */
+    header { position: sticky; top: 0; z-index: 50; backdrop-filter: saturate(140%) blur(8px); background: rgba(255,255,255,.72); border-bottom: 1px solid var(--gray-2) }
+    .nav { display: flex; align-items: center; justify-content: space-between; padding: 14px 0 }
+    .brand { display:flex; gap:12px; align-items:center; text-decoration:none; color:inherit }
+    .logo { width:46px; height:46px; border-radius:14px; background: linear-gradient(135deg, var(--yellow), #fff7d6); border:2px solid var(--black); display:grid; place-items:center; box-shadow: var(--shadow-1) }
+    .logo svg { width:24px; height:24px }
+    .brand span { font-weight: 800; letter-spacing:.2px; font-size: 1.12rem }
+    .nav-cta { display:flex; gap:10px; align-items:center }
+
+    /* =====================================================================
+       HERO
+       ===================================================================== */
+    .hero { padding: 56px 0 28px }
+    .hero .wrap { display:grid; grid-template-columns: 1.1fr .9fr; gap: 28px; align-items:center }
+    .title { font-size: var(--fs-800); line-height:1.06; margin:16px 0 8px; font-weight: 800 }
+    .subtitle { font-size: var(--fs-400); color:#2d2d2d; margin: 0 0 22px }
+    .cta-row { display:flex; gap:12px; flex-wrap:wrap }
+    .hero-card { background: linear-gradient(180deg, #fff, #fffbe7); border: 1px solid var(--black); border-radius: var(--r-2xl); padding:22px; box-shadow: var(--shadow-2) }
+    .hero-card ul { margin:0; padding:0; list-style:none; display:grid; gap:10px }
+    .hero-card li { display:flex; align-items:center; gap:10px }
+    .hero-card .tick { width:22px; height:22px; border-radius:6px; background: var(--yellow); border:1px solid var(--black); display:grid; place-items:center }
+
+    .quick { margin-top: 22px; display:flex; gap:10px; flex-wrap:wrap }
+    .quick a { text-decoration:none; display:flex; align-items:center; gap:8px; padding:10px 12px; border:1px dashed #222; border-radius:14px; color:inherit; background:#fff }
+
+    /* =====================================================================
+       BÖLÜMLER
+       ===================================================================== */
+    section { padding: 44px 0 }
+    .section-title { font-size: var(--fs-600); font-weight: 800; margin: 0 0 16px }
+
+    /* Hizmet ikonlu satırlar */
+    .service-grid { display:grid; grid-template-columns: repeat(12,1fr); gap:16px }
+    .service { grid-column: span 4; background:#fff; border:1px solid var(--black); border-radius: var(--r-xl); padding:16px; box-shadow: var(--shadow-1); display:grid; gap:10px }
+    .service .ico-box { width:44px; height:44px; border-radius:12px; border:1px solid var(--black); display:grid; place-items:center; background: var(--yellow) }
+
+    /* Galeri */
+    .gallery { display:grid; grid-template-columns: repeat(12, 1fr); gap: 14px }
+    .card { grid-column: span 4; background: #fff; border-radius: var(--r-xl); overflow:hidden; border:1px solid var(--black); box-shadow: var(--shadow-1); display:flex; flex-direction:column }
+    .card img { width:100%; aspect-ratio: 4 / 3; object-fit: cover; display:block }
+    .card .info { padding:12px 14px; display:flex; align-items:center; justify-content:space-between }
+    .tag { font-size:.8rem; font-weight:700; padding:6px 10px; border-radius:999px; background: var(--gray-1); border:1px solid var(--black) }
+
+    /* Fiyat/CTA bantları */
+    .band { background: var(--black); color: var(--white); border-radius: 24px; padding: 18px; display:flex; align-items:center; justify-content:space-between; gap:12px; box-shadow: var(--shadow-2); border:1px solid #000 }
+    .band strong { font-size: 1.15rem }
+
+    /* SSS (details/summary ile JS’siz akordeon) */
+    details.faq { border:1px solid var(--black); border-radius:16px; background:#fff; box-shadow:var(--shadow-1); padding:12px }
+    details.faq + details.faq { margin-top:12px }
+    details.faq summary { cursor:pointer; list-style:none; font-weight:700 }
+    details.faq[open] { background:#fffdf2 }
+
+    /* Footer */
+    footer { padding: 24px 0 120px; color:#333 }
+    footer .grid { grid-template-columns: 1fr auto; align-items:center }
+
+    /* Sabit WhatsApp FAB */
+    .floating { position: fixed; right: 18px; bottom: 18px; display:flex; flex-direction:column; gap:10px; z-index:60 }
+    .fab { display:flex; align-items:center; gap:10px; text-decoration:none; padding:12px 14px; border-radius:18px; font-weight:800; border:1px solid var(--black); background: var(--yellow); box-shadow: var(--shadow-2) }
+    .fab:hover { filter: brightness(0.98) }
+    .fab .ico { width:20px; height:20px }
+
+    /* Mobil yapışkan alt bar */
+    .stickybar { position: fixed; left:0; right:0; bottom:0; z-index:55; display:none; gap:10px; padding:10px; background: rgba(255,255,255,.9); border-top:1px solid var(--gray-2); backdrop-filter: blur(6px) }
+    .stickybar a { flex:1; text-align:center }
+
+    /* Duyarlılık */
+    @media (max-width: 1024px) {
+      .service { grid-column: span 6 }
+      .card { grid-column: span 6 }
+    }
+    @media (max-width: 900px) {
+      .hero .wrap { grid-template-columns: 1fr }
+    }
+    @media (max-width: 600px) {
+      .nav-cta { display:none }
+      .title { font-size: var(--fs-700) }
+      .card { grid-column: span 12 }
+      .floating { display:none }
+      .stickybar { display:flex }
+      footer { padding-bottom: 80px }
+    }
+
+    /* Karanlık mod desteği (kullanıcı sistem tercihine göre) */
+    @media (prefers-color-scheme: dark) {
+      body { background: radial-gradient(1200px 800px at 100% -10%, rgba(255,196,0,.12), transparent 60%), #0e0e0e; color:#f2f2f2 }
+      header { background: rgba(14,14,14,.65); border-bottom-color: #222 }
+      .nav-cta .btn.outline { border-color:#f2f2f2; color:#f2f2f2 }
+      .hero-card, .service, .card, details.faq { background:#121212; border-color:#333 }
+      .tag { background:#191919; border-color:#333; color:#ddd }
+      .quick a { background:#121212; border-color:#333; color:#eee }
+      .band { border-color:#000 }
+      .stickybar { background: rgba(20,20,20,.85); border-top-color:#222 }
+    }
+  </style>
+</head>
+<body>
+  <!-- SABİT WHATSAPP BUTONU (masaüstü) -->
+  <div class="floating" aria-label="Hızlı mesajlaşma">
+    <a class="fab" href="https://wa.me/905xxxxxxxxx" target="_blank" rel="noopener" aria-label="WhatsApp ile yazın">
+      <svg class="ico" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M2 12C2 6.48 6.48 2 12 2s10 4.48 10 10-4.48 10-10 10a9.96 9.96 0 0 1-4.9-1.29L2 22l1.38-5.02A9.96 9.96 0 0 1 2 12Z" stroke="#111" stroke-width="1.6"/><path d="M7.5 10.5c0 4 6 7 7.5 5.5.7-.7 1.1-1.5.8-2-.2-.3-1.1-.6-1.7-.8-.3-.1-.6.1-.8.4-.2.3-.6 1.1-1 1-.4-.1-2.1-1-2.9-2-.8-.9-1.4-2.2-1.3-2.6 0-.4.7-.6 1-.8.2-.2.4-.4.4-.7 0-.6-.3-1.4-.5-1.7-.4-.6-1.5-.4-1.9 0-.6.6-1.6 1.6-1.6 3.7Z" fill="#25D366" stroke="#111" stroke-width="1.2"/></svg>
+      WhatsApp
+    </a>
+  </div>
+
+  <!-- MOBİL STICKY BAR -->
+  <div class="stickybar" role="region" aria-label="Hızlı arama ve mesaj">
+    <a class="btn yellow" href="tel:+905xxxxxxxxx" aria-label="Hemen ara">Ara</a>
+    <a class="btn outline" href="https://wa.me/905xxxxxxxxx" target="_blank" rel="noopener" aria-label="WhatsApp">WhatsApp</a>
+  </div>
+
+  <!-- ÜST BAR -->
+  <header>
+    <div class="container nav">
+      <a href="#" class="brand" aria-label="Konya Taksi ana sayfa">
+        <span class="logo" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="6.5" width="18" height="10" rx="3" fill="#FFC400" stroke="#111" stroke-width="1.6"/><path d="M7 6.5l1.5-2h7L17 6.5" stroke="#111" stroke-width="1.6"/></svg>
+        </span>
+        <span>Konya Taksi</span>
+      </a>
+      <div class="nav-cta">
+        <a class="btn outline" href="tel:+905xxxxxxxxx">Hemen Ara</a>
+        <a class="btn yellow" href="https://wa.me/905xxxxxxxxx" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container wrap">
+        <div>
+          <span class="badge">
+            <svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 7l-9 9-4-4" stroke="#111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            7/24 Hızlı Ulaşım
+          </span>
+          <h1 class="title">Konya'da <span style="background:linear-gradient(transparent 60%, var(--yellow) 60%)">Güvenli</span> ve <span style="background:linear-gradient(transparent 60%, #fff3a3 60%)">Konforlu</span> Taksi</h1>
+          <p class="subtitle">Tek tıkla arayın veya WhatsApp’tan yazın. Şehir içi & şehirler arası, VIP ve havaalanı transferleri.</p>
+          <div class="cta-row">
+            <a class="btn yellow" href="tel:+905xxxxxxxxx" aria-label="Konya Taksi'yi ara">📞 Hemen Ara</a>
+            <a class="btn outline" href="https://wa.me/905xxxxxxxxx" target="_blank" rel="noopener" aria-label="WhatsApp ile yaz">💬 WhatsApp</a>
+          </div>
+          <div class="quick" aria-label="Hızlı bilgiler">
+            <a href="#galeri">🚕 Filomuzu Gör</a>
+            <a href="#hizmetler">🧭 Hizmetler</a>
+            <a href="#sss">❓ SSS</a>
+          </div>
+        </div>
+        <div class="hero-card" aria-label="Öne çıkan özellikler">
+          <ul>
+            <li><span class="tick">✓</span> Temiz ve bakımlı araçlar</li>
+            <li><span class="tick">✓</span> Deneyimli, güler yüzlü şoförler</li>
+            <li><span class="tick">✓</span> Hızlı yanıt – Tek tıkla iletişim</li>
+            <li><span class="tick">✓</span> Uygun fiyat, şeffaf hizmet</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- HİZMETLER -->
+    <section id="hizmetler">
+      <div class="container">
+        <h2 class="section-title">Hizmetlerimiz</h2>
+        <div class="service-grid">
+          <article class="service">
+            <span class="ico-box" aria-hidden="true">🚖</span>
+            <h3>Şehir İçi Ulaşım</h3>
+            <p class="muted">Konya’nın her noktasına hızlı ve güvenli ulaşım.</p>
+          </article>
+          <article class="service">
+            <span class="ico-box" aria-hidden="true">✈️</span>
+            <h3>Havaalanı Transfer</h3>
+            <p class="muted">Zamanında alım & bırakma, bagaj desteği.</p>
+          </article>
+          <article class="service">
+            <span class="ico-box" aria-hidden="true">🛣️</span>
+            <h3>Şehirler Arası</h3>
+            <p class="muted">Uzun yol konforu ve belirlenen mola planı.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALERİ (Fotoğrafları bağlantı ile ekleyin) -->
+    <section id="galeri">
+      <div class="container">
+        <h2 class="section-title">Filomuz</h2>
+        <p class="muted">Aşağıdaki <strong>img src</strong> alanlarına dış bağlantı (URL) olarak fotoğraf linklerinizi ekleyin. Dilediğiniz kadar kartı kopyalayıp çoğaltabilirsiniz.</p>
+        <div class="gallery">
+          <!-- KART 1: Fotoğrafı URL ile değiştirin -->
+          <article class="card">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1518306727298-4c7b19d4327a?q=80&w=1200&auto=format&fit=crop" alt="Konya Taksi – Sedan araç" />
+            <div class="info"><span>Konfor Sedan</span><span class="tag">Şehir içi</span></div>
+          </article>
+          <!-- KART 2 -->
+          <article class="card">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1502877338535-766e1452684a?q=80&w=1200&auto=format&fit=crop" alt="Konya Taksi – Geniş bagaj" />
+            <div class="info"><span>Geniş Bagaj</span><span class="tag">Transfer</span></div>
+          </article>
+          <!-- KART 3 -->
+          <article class="card">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1517949908110-58b7f0533b86?q=80&w=1200&auto=format&fit=crop" alt="Konya Taksi – VIP araç" />
+            <div class="info"><span>VIP Seçenek</span><span class="tag">Rezervasyon</span></div>
+          </article>
+          <!-- Kopyalamak için şablon
+          <article class="card">
+            <img loading="lazy" src="FOTO_URLSINI_BURAYA_YAPISTIRIN" alt="Araç adı veya kısa açıklama" />
+            <div class="info"><span>Araç Adı</span><span class="tag">Etiket</span></div>
+          </article>
+          -->
+        </div>
+      </div>
+    </section>
+
+    <!-- SSS -->
+    <section id="sss">
+      <div class="container">
+        <h2 class="section-title">Sık Sorulan Sorular</h2>
+        <details class="faq">
+          <summary>Nasıl rezervasyon yapabilirim?</summary>
+          <div class="muted">Hemen <a href="tel:+905xxxxxxxxx">telefon</a> ile arayabilir veya <a href="https://wa.me/905xxxxxxxxx" target="_blank" rel="noopener">WhatsApp</a> üzerinden yazabilirsiniz.</div>
+        </details>
+        <details class="faq">
+          <summary>Hangi bölgelerde hizmet veriyorsunuz?</summary>
+          <div class="muted">Konya merkez ve çevre ilçelerde, ayrıca isteğe bağlı şehirler arası hizmet veriyoruz.</div>
+        </details>
+        <details class="faq">
+          <summary>Ödeme yöntemleri nelerdir?</summary>
+          <div class="muted">Nakit ve yaygın dijital ödeme seçenekleriyle esnek ödeme imkânı sağlıyoruz.</div>
+        </details>
+      </div>
+    </section>
+
+    <!-- İLETİŞİM CTA BANDI -->
+    <section id="iletisim">
+      <div class="container">
+        <div class="band">
+          <div><strong>Hemen ulaşın:</strong> 7/24 destek, saniyeler içinde yanıt.</div>
+          <div style="display:flex; gap:10px; flex-wrap:wrap">
+            <a class="btn yellow" href="tel:+905xxxxxxxxx">📞 Ara</a>
+            <a class="btn outline" href="https://wa.me/905xxxxxxxxx" target="_blank" rel="noopener">💬 WhatsApp</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ALTYAPI & YASAL -->
+  <footer>
+    <div class="container grid">
+      <div>
+        <strong>Konya Taksi</strong> · Hızlı, güvenli ve konforlu.
+        <div style="margin-top:6px">Tel: <a href="tel:+905xxxxxxxxx">+90 5xx xxx xx xx</a> · WhatsApp: <a href="https://wa.me/905xxxxxxxxx" target="_blank" rel="noopener">Mesaj gönder</a></div>
+      </div>
+      <div>
+        <a href="#" class="btn outline" aria-label="Yukarı çık">Yukarı Çık</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Schema.org Basit İşletme Verisi (opsiyonel) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TaxiService",
+    "name": "Konya Taksi",
+    "areaServed": "Konya, Türkiye",
+    "telephone": "+905xxxxxxxxx",
+    "url": "https://example.com/",
+    "sameAs": ["https://wa.me/905xxxxxxxxx"],
+    "openingHours": "Mo-Su 00:00-23:59"
+  }
+  </script>
+</body>
+</html>
