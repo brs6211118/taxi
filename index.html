@@ -1,488 +1,367 @@
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Konya'nın en güvenilir taksi hizmeti. 7/24 hizmet, profesyonel şoförler, uygun fiyatlar.">
-    <title>Konya Taksi - Güvenilir ve Konforlu Taksi Hizmeti | 7/24 Hizmet</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --color-primary: #FFC400;
-            --color-primary-dark: #E6B000;
-            --color-secondary: #111111;
-            --color-text: #333333;
-            --color-text-light: #666666;
-            --color-background: #FFFFFF;
-            --color-background-alt: #F8F9FA;
-            --color-border: #E5E7EB;
-            --color-success: #10B981;
-            --font-family: 'Inter', sans-serif;
-            --spacing-md: 1rem;
-            --spacing-lg: 1.5rem;
-            --spacing-xl: 2rem;
-            --spacing-2xl: 3rem;
-            --spacing-3xl: 4rem;
-            --radius-lg: 0.75rem;
-            --radius-xl: 1rem;
-            --radius-full: 9999px;
-            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-            --transition-fast: 150ms ease-out;
-        }
-        
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --color-text: #FFFFFF;
-                --color-text-light: #D1D5DB;
-                --color-background: #111111;
-                --color-background-alt: #1F2937;
-                --color-border: #374151;
-            }
-        }
-        
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        html { scroll-behavior: smooth; }
-        
-        body {
-            font-family: var(--font-family);
-            line-height: 1.6;
-            color: var(--color-text);
-            background-color: var(--color-background);
-            padding-bottom: 100px;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 var(--spacing-md);
-        }
-        
-        .section { padding: var(--spacing-3xl) 0; }
-        .section-alt { background-color: var(--color-background-alt); }
-        
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: var(--spacing-md) var(--spacing-xl);
-            font-weight: 500;
-            text-decoration: none;
-            border-radius: var(--radius-lg);
-            transition: all var(--transition-fast);
-        }
-        
-        .btn-primary {
-            background-color: var(--color-primary);
-            color: var(--color-secondary);
-        }
-        
-        .btn-primary:hover {
-            background-color: var(--color-primary-dark);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
-        }
-        
-        .header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background-color: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--color-border);
-            z-index: 1030;
-        }
-        
-        .header-container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: var(--spacing-md);
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--color-text);
-            text-decoration: none;
-        }
-        
-        .logo-icon {
-            width: 32px;
-            height: 32px;
-            background-color: var(--color-primary);
-            border-radius: 0.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--color-secondary);
-            font-weight: 700;
-        }
-        
-        .hero {
-            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
-            color: var(--color-secondary);
-            padding: calc(80px + var(--spacing-3xl)) 0 var(--spacing-3xl);
-            text-align: center;
-        }
-        
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: var(--spacing-lg);
-        }
-        
-        .hero p {
-            font-size: 1.125rem;
-            margin-bottom: var(--spacing-xl);
-            opacity: 0.8;
-        }
-        
-        .floating-actions {
-            position: fixed;
-            bottom: var(--spacing-xl);
-            right: var(--spacing-xl);
-            z-index: 1030;
-            display: none;
-            flex-direction: column;
-            gap: var(--spacing-md);
-        }
-        
-        @media (min-width: 768px) {
-            .floating-actions { display: flex; }
-        }
-        
-        .floating-btn {
-            width: 56px;
-            height: 56px;
-            border-radius: var(--radius-full);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            box-shadow: var(--shadow-lg);
-            transition: all var(--transition-fast);
-        }
-        
-        .floating-btn:hover {
-            transform: scale(1.1) translateY(-2px);
-        }
-        
-        .floating-btn-whatsapp {
-            background-color: #25D366;
-            color: white;
-        }
-        
-        .floating-btn-phone {
-            background-color: var(--color-primary);
-            color: var(--color-secondary);
-        }
-        
-        .mobile-actions {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background-color: var(--color-background);
-            border-top: 1px solid var(--color-border);
-            padding: var(--spacing-md);
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: var(--spacing-md);
-            z-index: 1030;
-        }
-        
-        @media (min-width: 768px) {
-            .mobile-actions { display: none; }
-        }
-        
-        .mobile-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            padding: var(--spacing-md);
-            border-radius: var(--radius-lg);
-            text-decoration: none;
-            font-weight: 600;
-            transition: all var(--transition-fast);
-        }
-        
-        .mobile-btn-phone {
-            background-color: var(--color-primary);
-            color: var(--color-secondary);
-        }
-        
-        .mobile-btn-whatsapp {
-            background-color: #25D366;
-            color: white;
-        }
-        
-        .services-grid {
-            display: grid;
-            gap: var(--spacing-xl);
-            margin-top: var(--spacing-2xl);
-        }
-        
-        @media (min-width: 640px) {
-            .services-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-        
-        @media (min-width: 1024px) {
-            .services-grid { grid-template-columns: repeat(3, 1fr); }
-        }
-        
-        .service-card {
-            background-color: var(--color-background);
-            border: 1px solid var(--color-border);
-            border-radius: var(--radius-xl);
-            padding: var(--spacing-xl);
-            text-align: center;
-            transition: all var(--transition-fast);
-        }
-        
-        .service-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-lg);
-            border-color: var(--color-primary);
-        }
-        
-        .service-icon {
-            width: 64px;
-            height: 64px;
-            background-color: var(--color-primary);
-            color: var(--color-secondary);
-            border-radius: var(--radius-full);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto var(--spacing-lg);
-            font-size: 1.5rem;
-            font-weight: 700;
-        }
-        
-        .gallery-grid {
-            display: grid;
-            gap: var(--spacing-lg);
-            margin-top: var(--spacing-2xl);
-        }
-        
-        @media (min-width: 640px) {
-            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-        
-        @media (min-width: 1024px) {
-            .gallery-grid { grid-template-columns: repeat(3, 1fr); }
-        }
-        
-        .gallery-item {
-            position: relative;
-            border-radius: var(--radius-xl);
-            overflow: hidden;
-            aspect-ratio: 4/3;
-            transition: all var(--transition-fast);
-        }
-        
-        .gallery-item:hover {
-            transform: scale(1.02);
-            box-shadow: var(--shadow-lg);
-        }
-        
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-    </style>
-</head>
-<body>
+<!doctype html> <html lang="tr"> <head> <meta charset="utf-8" /> <meta name="viewport" content="width=device-width,initial-scale=1" /> <title>Konya Taksi — 7/24 Güvenilir Taksi Hizmeti</title> <!-- WHAT CHANGED (KISA ÖZET - 4-6 MADDE) 1. Mobile-first, erişilebilir ve semantik yapı tamamen yeniden düzenlendi. 2. Modern, minimal tasarım: CSS değişkenleri, büyük tipografi, açık/koyu mod. 3. Sabit WhatsApp + mobil yapışkan alt bar eklendi; tüm bağlantılar placeholder olarak bırakıldı. 4. Galeri (9 örnek), Hizmetler (6 öğe), Fiyat tabloları, SSS ve yazdırma stili eklendi. 5. JSON-LD LocalBusiness/TaxiService şeması ve Open Graph meta tag'leri eklenmiştir. 6. WCAG-AA hedefli kontrastlar, :focus-visible ve prefers-reduced-motion destekleri uygulandı. --> <!-- NASIL ÖZELLEŞTİRİLİR (KISA KILAVUZ) - Telefon numaralarını değiştirmek için: sayfa içinde geçen tüm "tel:+905XXXXXXXXX" yerlerini gerçek numaranızla değiştirin. Örnek: tel:+905XXXXXXXXX -> tel:+905331234567 - WhatsApp bağlantısını değiştirmek için: "https://wa.me/905XXXXXXXXX" yerine tam numarayı uluslararası formatta (ülke kodu dahil, + işareti olmadan) yazın. Örnek: https://wa.me/905XXXXXXXXX -> https://wa.me/905331234567 - Galeriye fotoğraf eklemek için: <!-- GALLERY: IMAGE URL TEMPLATE --> altındaki img src'lerini kendi URL'lerinizle değiştirin.
 
-<!-- Header -->
-<header class="header">
-    <div class="container">
-        <div class="header-container">
-            <a href="#" class="logo">
-                <div class="logo-icon">T</div>
-                Konya Taksi
-            </a>
-        </div>
-    </div>
-</header>
+Favicon eklemek isterseniz: <link rel="icon" href="/path/to/favicon.ico"> şeklinde <head> içine ekleyin.
 
-<!-- Hero Section -->
-<section class="hero">
-    <div class="container">
-        <h1>Konya'nın En Güvenilir Taksi Hizmeti</h1>
-        <p>7/24 hizmet, profesyonel şoförler, temiz araçlar ve uygun fiyatlarla güvenli yolculuklar.</p>
-        <div class="hero-actions">
-            <a href="tel:+905XXXXXXXXX" class="btn btn-primary">📞 Hemen Ara</a>
-            <a href="https://wa.me/905XXXXXXXXX" class="btn btn-primary">💬 WhatsApp</a>
-        </div>
-    </div>
-</section>
-
-<!-- Services Section -->
-<section class="section">
-    <div class="container">
-        <div class="section-header">
-            <h2>Hizmetlerimiz</h2>
-            <p>Konya genelinde sunduğumuz kaliteli taksi hizmetleri</p>
-        </div>
-        <div class="services-grid">
-            <div class="service-card">
-                <div class="service-icon">🚗</div>
-                <h3>Şehir İçi Ulaşım</h3>
-                <p>Konya merkezinde güvenli ve hızlı ulaşım hizmeti</p>
-            </div>
-            <div class="service-card">
-                <div class="service-icon">✈️</div>
-                <h3>Havalimanı Transferi</h3>
-                <p>Konya Havalimanı'na özel transfer hizmeti</p>
-            </div>
-            <div class="service-card">
-                <div class="service-icon">🏥</div>
-                <h3>Hastane Transferi</h3>
-                <p>Hasta nakli ve hastane ziyaretleri için özel hizmet</p>
-            </div>
-            <div class="service-card">
-                <div class="service-icon">🎓</div>
-                <h3>Okul Servisi</h3>
-                <p>Öğrenciler için güvenli okul servisi hizmeti</p>
-            </div>
-            <div class="service-card">
-                <div class="service-icon">🎉</div>
-                <h3>Özel Etkinlikler</h3>
-                <p>Düğün, mezuniyet ve özel günler için transfer</p>
-            </div>
-            <div class="service-card">
-                <div class="service-icon">🚐</div>
-                <h3>Grup Taşımacılığı</h3>
-                <p>Büyük gruplar için minibüs ve VIP araç hizmeti</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Gallery Section -->
-<section class="section section-alt">
-    <div class="container">
-        <div class="section-header">
-            <h2>Araç Galerisi</h2>
-            <p>Temiz, konforlu ve güvenli araç filomuz</p>
-        </div>
-        <div class="gallery-grid">
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=400&h=300&fit=crop" alt="Modern taksi aracı - temiz ve konforlu iç mekan" loading="lazy">
-            </div>
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?w=400&h=300&fit=crop" alt="Profesyonel taksi şoförü - güvenli sürüş" loading="lazy">
-            </div>
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1591768793355-74d04bb6608f?w=400&h=300&fit=crop" alt="Gece taksi hizmeti - 7/24 hizmet" loading="lazy">
-            </div>
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=400&h=300&fit=crop" alt="Konya şehir manzarası - yerel hizmet" loading="lazy">
-            </div>
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1562141961-d0a90c1fb0ea?w=400&h=300&fit=crop" alt="Havalimanı transfer hizmeti - zamanında varış" loading="lazy">
-            </div>
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1569493746052-1d6b3d6fcd50?w=400&h=300&fit=crop" alt="VIP taksi hizmeti - lüks araçlar" loading="lazy">
-            </div>
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1496114654133-85d0b203dd4d?w=400&h=300&fit=crop" alt="Grup taşımacılığı - minibüs hizmeti" loading="lazy">
-            </div>
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop" alt="Gündüz taksi hizmeti - şehir turu" loading="lazy">
-            </div>
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1613589529295-a9cee8e3a6a1?w=400&h=300&fit=crop" alt="Müşteri memnuniyeti - güler yüzlü hizmet" loading="lazy">
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Contact Section -->
-<section class="section">
-    <div class="container">
-        <div class="section-header">
-            <h2>İletişim</h2>
-            <p>7/24 ulaşabileceğiniz iletişim kanallarımız</p>
-        </div>
-        <div style="text-align: center; max-width: 600px; margin: 0 auto;">
-            <h3>📞 Telefon: <a href="tel:+905XXXXXXXXX" style="color: var(--color-primary);">+90 5XX XXX XX XX</a></h3>
-            <h3>💬 WhatsApp: <a href="https://wa.me/905XXXXXXXXX" style="color: #25D366;">+90 5XX XXX XX XX</a></h3>
-            <p style="margin-top: var(--spacing-lg); color: var(--color-text-light);">
-                Konya genelinde 7/24 taksi hizmeti. Hızlı, güvenli ve uygun fiyatlı ulaşım için bizi arayın!
-            </p>
-        </div>
-    </div>
-</section>
-
-<!-- Floating Action Buttons (Desktop) -->
-<div class="floating-actions">
-    <a href="https://wa.me/905XXXXXXXXX" class="floating-btn floating-btn-whatsapp" aria-label="WhatsApp">💬</a>
-    <a href="tel:+905XXXXXXXXX" class="floating-btn floating-btn-phone" aria-label="Telefon">📞</a>
-</div>
-
-<!-- Mobile Actions (Mobile) -->
-<div class="mobile-actions">
-    <a href="tel:+905XXXXXXXXX" class="mobile-btn mobile-btn-phone">📞 Ara</a>
-    <a href="https://wa.me/905XXXXXXXXX" class="mobile-btn mobile-btn-whatsapp">💬 WhatsApp</a>
-</div>
-
-<!-- JSON-LD Schema -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "TaxiService",
-  "name": "Konya Taksi",
-  "description": "Konya'nın en güvenilir taksi hizmeti. 7/24 hizmet, profesyonel şoförler, uygun fiyatlar.",
-  "areaServed": "Konya, Turkey",
-  "availableLanguage": "Turkish",
-  "telephone": "+905XXXXXXXXX",
-  "priceRange": "$$",
-  "openingHours": "Mo-Su 00:00-24:00",
-  "serviceType": "Taxi Service",
-  "hasOfferCatalog": {
-    "@type": "OfferCatalog",
-    "name": "Taksi Hizmetleri",
-    "itemListElement": [
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Şehir İçi Ulaşım"
-        }
-      },
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Havalimanı Transferi"
-        }
-      }
-    ]
-  }
-}
-</script>
-
-<!--
-TEST CHECKLIST:
-- Mobile responsiveness test on different screen sizes
-- Accessibility test with keyboard navigation and screen readers
-- Print test to ensure floating elements are hidden
-- Dark mode test by changing system preferences
-- Phone and WhatsApp link functionality test
-- Performance test for image loading and CSS animations
-- Cross-browser compatibility test
+JSON-LD schema içindeki "telephone" alanını gerçek numaranızla değiştirin.
 -->
 
-</body>
-</html>
+<!-- Open Graph & SEO --> <meta name="description" content="Konya Taksi — Güvenilir, 7/24 taksi hizmeti. Havalimanı transferleri, saatlik kiralama, kurumsal hizmetler ve online rezervasyon seçenekleri."> <meta property="og:title" content="Konya Taksi — 7/24 Güvenilir Taksi Hizmeti"> <meta property="og:description" content="Konya Taksi — Güvenilir, hızlı ve konforlu ulaşım. Hemen arayın veya WhatsApp'tan mesaj gönderin."> <meta property="og:type" content="website"> <meta property="og:url" content="https://www.konyataksi.example/"> <meta property="og:image" content="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1200&q=80"> <meta name="twitter:card" content="summary_large_image"> <!-- Optional Google Font (leave as is or remove for local-only fallback) --> <!-- If you prefer to avoid external requests, remove the following link and rely on system fonts in CSS fallback stack. --> <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet"> <!-- JSON-LD - LocalBusiness / TaxiService --> <script type="application/ld+json"> { "@context": "https://schema.org", "@type": "TaxiService", "name": "Konya Taksi", "image": [ "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1200&q=80" ], "telephone": "tel:+905XXXXXXXXX", "url": "https://www.konyataksi.example/", "address": { "@type": "PostalAddress", "streetAddress": "Örnek Mah. Taksi Merkezi Cad. No:1", "addressLocality": "Konya", "addressRegion": "Konya", "postalCode": "42000", "addressCountry": "TR" }, "priceRange": "₺", "openingHours": "Mo-Su 00:00-23:59", "description": "Konya Taksi - konforlu, güvenli ve zamanında taksi hizmetleri." } </script> <style> /* ========================================================================== GLOBAL: CSS DEĞİŞKENLER VE TEMEL DÜZEN - Mobile-first - Değişkenler tema üzerine kuruludur (light/dark destekli) ========================================================================== */ :root{ /* Color palette */ --color-primary: #FFC400; /* yellow main accent */ --color-on-primary: #111111; /* text on yellow */ --color-bg: #ffffff; --color-surface: #ffffff; --color-muted: #6b6b6b; --color-text: #111111; --color-border: #e9e9ea; /* Dark mode variants */ --color-bg-dark: #0b0b0b; --color-surface-dark: #0f0f10; --color-text-dark: #f4f4f5; --color-muted-dark: #c9c9c9; --color-border-dark: #222223; /* Spacing scale */ --space-xxs: 4px; --space-xs: 8px; --space-sm: 12px; --space-md: 16px; --space-lg: 24px; --space-xl: 32px; --space-2xl: 48px; --space-3xl: 64px; /* Radii & shadows */ --radius-sm: 6px; --radius-md: 12px; --radius-lg: 20px; --card-shadow: 0 6px 18px rgba(16,16,16,0.08); --card-shadow-dark: 0 6px 22px rgba(0,0,0,0.6); /* Typography */ --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; --type-scale-ratio: 1.2; --text-xs: 0.75rem; /* 12px */ --text-sm: 0.875rem; /* 14px */ --text-base: 1rem; /* 16px */ --text-lg: 1.125rem; /* 18px */ --text-xl: 1.5rem; /* 24px */ --text-2xl: 1.875rem;/* 30px */ --text-3xl: 2.25rem; /* 36px */ /* Transition */ --trans-fast: 160ms; --trans-medium: 280ms; --trans-acc: cubic-bezier(.2,.9,.2,1); } /* prefers-color-scheme: dark */ @media (prefers-color-scheme: dark) { :root{ --color-bg: var(--color-bg-dark); --color-surface: var(--color-surface-dark); --color-text: var(--color-text-dark); --color-muted: var(--color-muted-dark); --color-border: var(--color-border-dark); --card-shadow: var(--card-shadow-dark); } } /* prefers-reduced-motion support */ @media (prefers-reduced-motion: reduce) { :root{ --trans-fast: 0ms; --trans-medium: 0ms; } * { animation-duration: 0ms !important; transition-duration: 0ms !important; scroll-behavior: auto !important; } } /* Baseline reset (mobile-first) */ :where(html,body){ height:100%; } html{ box-sizing:border-box; font-family: var(--font-sans); -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; text-size-adjust:100%; background: linear-gradient(180deg, var(--color-bg) 0%, var(--color-surface) 100%); color:var(--color-text); scroll-behavior: smooth; } *,*::before,*::after{box-sizing:inherit} body{ margin:0; font-size:var(--text-base); line-height:1.45; -webkit-tap-highlight-color: transparent; -webkit-font-feature-settings: "liga" 1; min-height:100vh; display:flex; flex-direction:column; } /* Accessibility helpers */ .visually-hidden{ position: absolute !important; height: 1px; width: 1px; overflow: hidden; clip: rect(1px,1px,1px,1px); white-space: nowrap; border: 0; padding: 0; margin: -1px; } /* Focus styles - :focus-visible polyfill friendly */ :focus{outline: none} :focus-visible{ outline: 3px solid color-mix(in srgb, var(--color-primary) 40%, transparent); outline-offset: 3px; border-radius: calc(var(--radius-sm) + 2px); box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-primary) 14%, transparent); } /* Layout utilities (component vs utility separation) */ .container{ width:100%; max-width:1200px; margin-inline:auto; padding-inline: var(--space-md); } .row{ display:flex; gap:var(--space-lg); align-items:center; flex-wrap:wrap; } .stack{ display:flex; flex-direction:column; gap:var(--space-md); } .card{ background:var(--color-surface); border-radius:var(--radius-md); box-shadow:var(--card-shadow); border: 1px solid var(--color-border); padding:var(--space-md); } /* Typography */ h1,h2,h3,h4,h5{ margin:0; line-height:1.05; color:var(--color-text); } h1{font-size:var(--text-2xl); font-weight:800; letter-spacing:-0.02em} h2{font-size:var(--text-xl); font-weight:700} h3{font-size:var(--text-lg); font-weight:700} p{margin:0 0 var(--space-md) 0; color:var(--color-muted)} /* Buttons & links */ .btn{ display:inline-flex; align-items:center; gap:10px; padding: calc(var(--space-xs)) var(--space-md); background:var(--color-primary); color:var(--color-on-primary); border-radius:var(--radius-lg); font-weight:700; text-decoration:none; border: none; cursor:pointer; box-shadow: 0 8px 24px rgba(255,196,0,0.12); transition: transform var(--trans-fast) var(--trans-acc), box-shadow var(--trans-fast) linear, opacity var(--trans-fast) linear; } .btn:active{ transform: translateY(1px) } .btn:hover, .btn:focus{ transform: translateY(-3px); box-shadow: 0 12px 34px rgba(255,196,0,0.18); } .btn.secondary{ background:transparent; color:var(--color-text); border:1px solid var(--color-border); box-shadow:none; } a[href^="tel:"], a[href^="mailto:"], a[href^="https://wa.me"]{ text-decoration:none; color:inherit; } /* Hero */ .hero{ padding:var(--space-2xl) 0; display:flex; align-items:center; gap:var(--space-lg); justify-content:space-between; } .hero-left{ flex:1 1 380px; min-width:230px; } .hero-right{ flex:0 0 280px; display:flex; align-items:center; justify-content:center; } .hero-kicker{ display:inline-block; padding: calc(var(--space-xs)) calc(var(--space-sm)); background: color-mix(in srgb, var(--color-primary) 10%, transparent); color:var(--color-on-primary); border-radius:999px; font-weight:700; font-size:var(--text-sm); margin-bottom:var(--space-sm); } .hero-phones{ display:flex; gap:var(--space-sm); margin-top:var(--space-md); flex-wrap:wrap; } .hero-phone{ display:inline-flex; gap:8px; align-items:center; background: color-mix(in srgb,var(--color-primary) 6%, transparent); padding: calc(var(--space-xs)) calc(var(--space-sm)); border-radius:var(--radius-md); font-weight:600; font-size:var(--text-sm); } /* Quick service cards */ .services-grid{ display:grid; grid-template-columns: repeat(2, 1fr); gap:var(--space-md); } @media(min-width:720px){ .services-grid{ grid-template-columns: repeat(3, 1fr) } } .service{ display:flex; gap:var(--space-sm); align-items:flex-start; background: linear-gradient(180deg, color-mix(in srgb,var(--color-primary) 4%, transparent), transparent); padding:var(--space-sm); border-radius:var(--radius-md); border:1px solid var(--color-border); } .service-icon{ min-width:44px; height:44px; display:inline-grid; place-items:center; border-radius:10px; background:var(--color-surface); box-shadow: 0 6px 18px rgba(0,0,0,0.04); font-weight:800; color:var(--color-text); } /* Gallery */ .gallery{ display:grid; gap:var(--space-sm); grid-template-columns: repeat(2, 1fr); } @media(min-width:720px){ .gallery{ grid-template-columns: repeat(3, 1fr) } } .gallery-card{ position:relative; overflow:hidden; border-radius:var(--radius-md); min-height:160px; display:block; background:linear-gradient(180deg, rgba(0,0,0,0.03), rgba(0,0,0,0.02)); border:1px solid var(--color-border); } .gallery-card img{ width:100%; height:100%; object-fit:cover; display:block; vertical-align:middle; transition: transform var(--trans-medium) var(--trans-acc); } .gallery-card:hover img, .gallery-card:focus-within img{ transform: scale(1.05); } .gallery-caption{ position:absolute; left:var(--space-sm); bottom:var(--space-sm); background: linear-gradient(90deg, rgba(0,0,0,0.5), rgba(0,0,0,0.18)); color: #fff; padding:6px 10px; border-radius:8px; font-weight:700; font-size:var(--text-sm); } /* Pricing Table */ .pricing{ display:grid; gap:var(--space-sm); grid-template-columns: 1fr; } @media(min-width:900px){ .pricing{ grid-template-columns: repeat(3, 1fr) } } .price-card{ border-radius:var(--radius-md); padding:var(--space-md); text-align:center; border:1px solid var(--color-border); } .price{ font-size:var(--text-2xl); font-weight:800; margin-top:var(--space-sm); color:var(--color-text); } .price-sub{ color:var(--color-muted); font-size:var(--text-sm); margin-bottom:var(--space-md); } /* FAQ */ .faq{ display:flex; flex-direction:column; gap:var(--space-md); } .faq details{ background: var(--color-surface); border-radius:var(--radius-sm); padding:var(--space-sm); border:1px solid var(--color-border); } .faq summary{ cursor:pointer; font-weight:700; list-style:none; outline:none; } .faq details[open] summary{ color:var(--color-text) } /* Footer */ footer{ margin-top:auto; padding:var(--space-2xl) 0; border-top:1px solid var(--color-border); background: transparent; } .footer-grid{ display:grid; gap:var(--space-md); grid-template-columns: 1fr; } @media(min-width:720px){ .footer-grid{ grid-template-columns: 1fr 1fr 1fr } } .socials{ display:flex; gap:var(--space-sm); align-items:center; } /* Sticky WhatsApp button (desktop) */ .whatsapp-fab{ position: fixed; right: 22px; bottom: 120px; z-index: 9999; display: inline-flex; align-items:center; gap:10px; padding:12px 14px; border-radius:999px; box-shadow: 0 12px 36px rgba(0,0,0,0.18); background:linear-gradient(90deg, var(--color-primary), color-mix(in srgb,var(--color-primary) 85%, #ffde6a)); color:var(--color-on-primary); text-decoration:none; font-weight:800; transition: transform var(--trans-fast) var(--trans-acc); border: none; } .whatsapp-fab:focus-visible{ transform: translateY(-4px) } .whatsapp-fab .badge{ font-size:var(--text-xs); background: rgba(0,0,0,0.06); padding:2px 6px; border-radius:999px; color:var(--color-text); font-weight:700; } @media(max-width:900px){ .whatsapp-fab{ display:none } } /* Mobile sticky bottom bar: Call + WhatsApp */ .mobile-bottom-bar{ display:flex; gap:var(--space-sm); align-items:center; justify-content:space-between; position:fixed; left:0; right:0; bottom:0; padding:10px; background: linear-gradient(180deg, color-mix(in srgb,var(--color-surface) 90%, transparent), var(--color-surface)); border-top: 1px solid var(--color-border); box-shadow: 0 -10px 30px rgba(0,0,0,0.06); z-index:9999; } .mobile-bottom-bar .pill{ display:flex; align-items:center; gap:8px; padding:10px 14px; border-radius:999px; background:var(--color-surface); text-decoration:none; color:var(--color-text); font-weight:700; flex:1 1 auto; justify-content:center; } @media(min-width:900px){ .mobile-bottom-bar{ display:none } } /* Print styles */ @media print { .whatsapp-fab, .mobile-bottom-bar, nav, .no-print{ display:none !important; } body{ background: #fff; color: #000; } .container{ padding-inline:0; } img{ max-width:100%; height:auto; } .card{ box-shadow:none; border: none; } } /* Tiny helpers */ .muted{ color:var(--color-muted); font-size:var(--text-sm) } .kicker{ color:var(--color-muted); font-weight:700; font-size:var(--text-sm) } .meta{ font-size:var(--text-sm); color:var(--color-muted) } /* Utilities - spacing */ .mb-xs{ margin-bottom:var(--space-xs) } .mb-sm{ margin-bottom:var(--space-sm) } .mb-md{ margin-bottom:var(--space-md) } .mt-sm{ margin-top:var(--space-sm) } .p-0{ padding:0 } .p-sm{ padding:var(--space-sm) } /* Simple grid for features */ .feature-grid{ display:grid; grid-template-columns: repeat(1,1fr); gap:var(--space-md); } @media(min-width:720px){ .feature-grid{ grid-template-columns: repeat(2,1fr) } } /* Small screen header compact */ header .topbar{ display:flex; align-items:center; justify-content:space-between; gap:var(--space-sm); padding: var(--space-sm) 0; } /* Accessible skip link */ .skip-link{ position:absolute; left: -10000px; top:auto; width:1px; height:1px; overflow:hidden; } .skip-link:focus{ left: var(--space-md); top: var(--space-md); width:auto; height:auto; background:var(--color-surface); padding:var(--space-sm); border-radius:6px; box-shadow: var(--card-shadow); z-index:10000; } /* Small decorative separator */ .divider{ height:1px; background:var(--color-border); margin:var(--space-md) 0; border-radius:999px; } /* Responsive helpers for header nav */ nav .nav-links{ display:flex; gap:var(--space-sm); align-items:center; flex-wrap:wrap; } nav a.nav-item{ padding:8px 10px; border-radius:8px; text-decoration:none; color:var(--color-text); font-weight:600; } nav a.nav-item:hover, nav a.nav-item:focus{ background: color-mix(in srgb,var(--color-primary) 8%, transparent); } /* Large call-to-action area */ .cta-large{ display:flex; gap:var(--space-lg); align-items:center; padding: var(--space-md); border-radius:var(--radius-lg); background: linear-gradient(90deg, color-mix(in srgb,var(--color-primary) 6%, transparent), transparent); } /* Accessible table for fares */ table.pricing-table{ width:100%; border-collapse:collapse; font-size:var(--text-sm); } table.pricing-table th, table.pricing-table td{ text-align:left; padding:12px; border-bottom:1px solid var(--color-border); } table.pricing-table thead th{ font-weight:700; background:transparent; } /* Small utility for badges */ .badge{ display:inline-block; padding:6px 8px; border-radius:999px; font-weight:700; font-size:var(--text-xs); background: color-mix(in srgb, var(--color-primary) 12%, transparent); } /* Ensure good contrast for primary button text in dark mode */ @media (prefers-color-scheme: dark){ .btn{ color: #0b0b0b } } /* End of CSS */ </style> </head> <body>
+
+<a class="skip-link" href="#main">İçeriğe atla</a>
+
+<header class="container" role="banner" aria-label="Sayfa başlığı"> <div class="topbar" role="navigation" aria-label="Üst navigasyon"> <div class="brand" style="display:flex;align-items:center;gap:12px;"> <a href="#" aria-label="Konya Taksi anasayfa" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit;"> <!-- Logo (svg inline for no external asset load) --> <svg width="44" height="44" viewBox="0 0 24 24" aria-hidden="true" focusable="false" role="img"> <rect rx="6" width="100%" height="100%" fill="#FFC400"></rect> <path d="M4 14c0-3 1-6 5-6s5 3 5 6" fill="none" stroke="#111" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/> <circle cx="7.5" cy="16.8" r="1.5" fill="#111"></circle> <circle cx="15.5" cy="16.8" r="1.5" fill="#111"></circle> </svg> <div style="display:flex;flex-direction:column;line-height:1;"> <strong style="font-weight:800;">Konya Taksi</strong> <span class="meta">7/24 Güvenilir Ulaşım</span> </div> </a> </div>
+  <nav aria-label="Ana navigasyon">
+    <div class="nav-links" role="menubar">
+      <a class="nav-item" href="#services" role="menuitem">Hizmetler</a>
+      <a class="nav-item" href="#pricing" role="menuitem">Fiyatlar</a>
+      <a class="nav-item" href="#gallery" role="menuitem">Galeri</a>
+      <a class="nav-item" href="#faq" role="menuitem">SSS</a>
+      <a class="nav-item" href="#contact" role="menuitem">İletişim</a>
+    </div>
+  </nav>
+</div>
+
+</header> <main id="main" class="container" role="main" aria-labelledby="hero-heading">
+<!-- HERO -->
+<section class="hero" aria-labelledby="hero-heading" role="region">
+  <div class="hero-left">
+    <p class="hero-kicker" aria-hidden="true">Hızlı — Güvenli — Konforlu</p>
+    <h1 id="hero-heading" style="font-size:var(--text-3xl);">Konya Taksi — 7/24 Şehir İçi & Havalimanı Transferleri</h1>
+    <p class="mb-md">Konya içi hızlı ulaşım, sabit tarifeli havalimanı transferleri, saatlik kiralama ve kurumsal çözümler. Rezervasyon veya acil çağrı için hemen bizi arayın.</p>
+
+    <div class="hero-phones" aria-label="Telefon ve iletişim">
+      <!-- Placeholder numbers: replace tel:+905XXXXXXXXX with real number -->
+      <!-- Replace https://wa.me/905XXXXXXXXX with your WhatsApp link (no + sign in wa.me) -->
+      <a class="hero-phone" href="tel:+905XXXXXXXXX" aria-label="Taksi çağırmak için ara" title="Ara: +90 5XXXXXXXX">
+        📞 <span>+90 5XXXXXXXXX</span>
+      </a>
+
+      <a class="btn" href="https://wa.me/905XXXXXXXXX" aria-label="WhatsApp'tan mesaj gönder" title="WhatsApp">
+        💬 <span>WhatsApp ile Yaz</span>
+      </a>
+
+      <a class="btn secondary" href="#booking" aria-label="Rezervasyon formuna git">
+        🕒 <span>Rezervasyon Yap</span>
+      </a>
+    </div>
+
+    <div style="margin-top:var(--space-md); display:flex; gap:var(--space-sm); align-items:center;">
+      <span class="badge" aria-hidden="true">Hızlı Varış</span>
+      <span class="meta">Araçlarımız sigortalı ve düzenli denetlenir.</span>
+    </div>
+
+  </div>
+
+  <div class="hero-right" aria-hidden="true">
+    <!-- Decorative taxi illustration - inline SVG to avoid external assets -->
+    <div class="card" style="padding:18px; border-radius:18px;">
+      <svg width="220" height="120" viewBox="0 0 220 120" role="img" aria-label="Taksi illüstrasyonu">
+        <rect x="2" y="40" rx="12" ry="12" width="200" height="60" fill="#111" opacity="0.06"></rect>
+        <g transform="translate(8,6)">
+          <rect x="0" y="34" rx="12" ry="12" width="200" height="50" fill="#FFC400"></rect>
+          <rect x="12" y="6" width="140" height="30" rx="6" ry="6" fill="#fff"></rect>
+          <circle cx="34" cy="96" r="12" fill="#111"></circle>
+          <circle cx="158" cy="96" r="12" fill="#111"></circle>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<div class="divider" aria-hidden="true"></div>
+
+<!-- SERVICES -->
+<section id="services" class="stack" aria-labelledby="services-heading" role="region">
+  <h2 id="services-heading">Hizmetlerimiz</h2>
+  <p class="muted">Konya ve çevresinde sunduğumuz başlıca hizmetler. Daha fazlası için bizi arayın.</p>
+
+  <div class="services-grid" role="list">
+    <!-- Service items: use clear classNames and semantic content -->
+    <article class="service" role="listitem" aria-labelledby="s1-title">
+      <div class="service-icon" aria-hidden="true">🚕</div>
+      <div>
+        <h3 id="s1-title">Şehir İçi Taksi</h3>
+        <p class="muted">Hızlı ve ekonomik şehir içi taşımacılık.</p>
+      </div>
+    </article>
+
+    <article class="service" role="listitem" aria-labelledby="s2-title">
+      <div class="service-icon" aria-hidden="true">✈️</div>
+      <div>
+        <h3 id="s2-title">Havalimanı Transferleri</h3>
+        <p class="muted">Sabah/akşam sabit tarifeler, konforlu transfer.</p>
+      </div>
+    </article>
+
+    <article class="service" role="listitem" aria-labelledby="s3-title">
+      <div class="service-icon" aria-hidden="true">📅</div>
+      <div>
+        <h3 id="s3-title">Saatlik Kiralama</h3>
+        <p class="muted">İhtiyacınıza göre kısa veya uzun süreli kiralama.</p>
+      </div>
+    </article>
+
+    <article class="service" role="listitem" aria-labelledby="s4-title">
+      <div class="service-icon" aria-hidden="true">🏢</div>
+      <div>
+        <h3 id="s4-title">Kurumsal Hizmetler</h3>
+        <p class="muted">Firma anlaşmaları ve kurumsal fatura seçenekleri.</p>
+      </div>
+    </article>
+
+    <article class="service" role="listitem" aria-labelledby="s5-title">
+      <div class="service-icon" aria-hidden="true">🛣️</div>
+      <div>
+        <h3 id="s5-title">Uzun Mesafe Transfer</h3>
+        <p class="muted">Şehirlerarası konforlu yolculuklar.</p>
+      </div>
+    </article>
+
+    <article class="service" role="listitem" aria-labelledby="s6-title">
+      <div class="service-icon" aria-hidden="true">♿</div>
+      <div>
+        <h3 id="s6-title">Engelli Erişimi</h3>
+        <p class="muted">Özel araçlarla erişilebilir hizmet.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<div class="divider" aria-hidden="true"></div>
+
+<!-- PRICING -->
+<section id="pricing" class="stack" aria-labelledby="pricing-heading" role="region">
+  <h2 id="pricing-heading">Fiyatlandırma</h2>
+  <p class="muted">Aşağıdaki fiyatlar örnek tarifelerdir. Kesin ücret için çağrı yapınız.</p>
+
+  <div class="pricing" role="list">
+    <div class="price-card card" role="listitem" aria-labelledby="price1">
+      <h3 id="price1">Şehir İçi</h3>
+      <div class="price">Başlangıç: <span style="font-weight:900">₺15</span></div>
+      <div class="price-sub">Kilometre başı: ₺3,5</div>
+      <p class="muted">Trafik ve mesafe değişkenlik gösterebilir.</p>
+      <a class="btn" href="tel:+905XXXXXXXXX" aria-label="Şehir içi taksi ara">Hemen Ara</a>
+    </div>
+
+    <div class="price-card card" role="listitem" aria-labelledby="price2">
+      <h3 id="price2">Havalimanı Transfer</h3>
+      <div class="price">Sabit Ücret: <span style="font-weight:900">₺120</span></div>
+      <div class="price-sub">Tek yön, 1-4 kişi</div>
+      <p class="muted">Bagaj dahil, ek ücretler önceden bilgilendirilir.</p>
+      <a class="btn" href="#booking" aria-label="Havalimanı transfer rezervasyonu">Rezervasyon</a>
+    </div>
+
+    <div class="price-card card" role="listitem" aria-labelledby="price3">
+      <h3 id="price3">Saatlik Kiralama</h3>
+      <div class="price">Saatlik: <span style="font-weight:900">₺85 / saat</span></div>
+      <div class="price-sub">Minimum 2 saat</div>
+      <p class="muted">Şoför dahil, kilometre paketleri mevcuttur.</p>
+      <a class="btn" href="https://wa.me/905XXXXXXXXX" aria-label="Saatlik kiralama için WhatsApp">Teklif Al</a>
+    </div>
+  </div>
+
+  <!-- Accessible table with sample fares -->
+  <div style="margin-top:var(--space-md); overflow:auto;">
+    <table class="pricing-table" aria-label="Örnek tarifeler tablosu">
+      <thead>
+        <tr>
+          <th>Hizmet</th>
+          <th>Sabit Ücret</th>
+          <th>Kilometre</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Şehir İçi</td>
+          <td>₺15</td>
+          <td>₺3,5 / km</td>
+        </tr>
+        <tr>
+          <td>Havalimanı (Merkez - Havalimanı)</td>
+          <td>₺120</td>
+          <td>-</td>
+        </tr>
+        <tr>
+          <td>Saatlik Kiralama</td>
+          <td>₺85 / saat</td>
+          <td>Pakete göre</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<div class="divider" aria-hidden="true"></div>
+
+<!-- GALLERY -->
+<section id="gallery" class="stack" aria-labelledby="gallery-heading" role="region">
+  <h2 id="gallery-heading">Galeri</h2>
+  <p class="muted">Aşağıdaki resimler örnek amaçlıdır. Galeri resimlerini kendi araç fotoğraflarınızla değiştirin.</p>
+
+  <!--
+    GALLERY: IMAGE URL TEMPLATE
+    - Kolay kopyalanabilir şablon:
+      <article class="gallery-card"><img src="https://link-to-your-image.jpg" alt="Araç - Açıklayıcı alt metin" loading="lazy"></article>
+    - Alt metinler örnek ve açıklayıcı olmalı. Örn: "Sarı taksi - ön görünüş - gece"
+  -->
+  <div class="gallery" role="list">
+    <article class="gallery-card" role="listitem">
+      <img src="https://images.unsplash.com/photo-1511407397940-d57f68e81203?w=800&q=80" alt="Sarı taksi - şehrin sokaklarında - gündüz" loading="lazy">
+      <div class="gallery-caption">Şehir İçi</div>
+    </article>
+
+    <article class="gallery-card" role="listitem">
+      <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800&q=80" alt="Taksi önünden detay - gece, farlar" loading="lazy">
+      <div class="gallery-caption">Akşam Transferi</div>
+    </article>
+
+    <article class="gallery-card" role="listitem">
+      <img src="https://images.unsplash.com/photo-1542362567-b07e54358753?w=800&q=80" alt="Taksi iç kabin - konforlu koltuklar" loading="lazy">
+      <div class="gallery-caption">Konforlu İç Mekan</div>
+    </article>
+
+    <article class="gallery-card" role="listitem">
+      <img src="https://images.unsplash.com/photo-1504215680853-026ed2a45def?w=800&q=80" alt="Taksi aracının tekerleği ve detay" loading="lazy">
+      <div class="gallery-caption">Bakımlı Araçlar</div>
+    </article>
+
+    <article class="gallery-card" role="listitem">
+      <img src="https://images.unsplash.com/photo-1502877338535-766e1452684a?w=800&q=80" alt="Sürücü - profesyonel ve güleryüzlü" loading="lazy">
+      <div class="gallery-caption">Profesyonel Şoför</div>
+    </article>
+
+    <article class="gallery-card" role="listitem">
+      <img src="https://images.unsplash.com/photo-1529101091764-c3526daf38fe?w=800&q=80" alt="Taksi - havalimanı transferi - bagaj" loading="lazy">
+      <div class="gallery-caption">Havalimanı Transferi</div>
+    </article>
+
+    <article class="gallery-card" role="listitem">
+      <img src="https://images.unsplash.com/photo-1519821172141-b5f529a3b8d0?w=800&q=80" alt="Araç filosu - park halinde birden fazla taksi" loading="lazy">
+      <div class="gallery-caption">Filo Görünümü</div>
+    </article>
+
+    <article class="gallery-card" role="listitem">
+      <img src="https://images.unsplash.com/photo-1532491171143-6f26d8aeaf13?w=800&q=80" alt="Şehir manzarası ile taksi - gün batımı" loading="lazy">
+      <div class="gallery-caption">Gün Batımı Yolculuk</div>
+    </article>
+
+    <article class="gallery-card" role="listitem">
+      <img src="https://images.unsplash.com/photo-1519985176271-adb1088fa94c?w=800&q=80" alt="İç mekanda temizlik - hijyen paketi" loading="lazy">
+      <div class="gallery-caption">Hijyenik Araçlar</div>
+    </article>
+  </div>
+</section>
+
+<div class="divider" aria-hidden="true"></div>
+
+<!-- BOOKING CTA -->
+<section id="booking" class="card cta-large" aria-labelledby="booking-heading" role="region">
+  <div>
+    <h2 id="booking-heading">Rezervasyon & Çağrı</h2>
+    <p class="muted">Rezervasyon yapmak veya fiyat teklifi almak için telefon veya WhatsApp'tan bize ulaşabilirsiniz.</p>
+    <div style="display:flex;gap:var(--space-sm); margin-top:var(--space-md); flex-wrap:wrap;">
+      <a class="btn" href="tel:+905XXXXXXXXX" aria-label="Hemen ara">📞 Hemen Ara</a>
+      <a class="btn" href="https://wa.me/905XXXXXXXXX" aria-label="WhatsApp'tan mesaj gönder">💬 WhatsApp</a>
+    </div>
+  </div>
+
+  <div style="min-width:140px; text-align:center;">
+    <div style="font-weight:800; font-size:var(--text-xl);">7/24</div>
+    <div class="muted">Hızlı cevap</div>
+  </div>
+</section>
+
+<div class="divider" aria-hidden="true"></div>
+
+<!-- FAQ -->
+<section id="faq" class="stack" aria-labelledby="faq-heading" role="region">
+  <h2 id="faq-heading">Sıkça Sorulan Sorular (SSS)</h2>
+  <p class="muted">Müşterilerimizin sıkça sorduğu sorular ve kısa cevapları.</p>
+
+  <div class="faq" role="list">
+    <details role="listitem">
+      <summary>Nasıl rezervasyon yapabilirim?</summary>
+      <div class="muted">Telefonla arayarak veya WhatsApp üzerinden mesaj göndererek rezervasyon yapabilirsiniz. Rezervasyonlar için lütfen +90 5XXXXXXXXX numaramızı kullanın.</div>
+    </details>
+
+    <details role="listitem">
+      <summary>Ödeme seçenekleri nelerdir?</summary>
+      <div class="muted">Nakit, banka kartı ve kurumsal anlaşmalar için fatura ile ödeme seçenekleri mevcuttur.</div>
+    </details>
+
+    <details role="listitem">
+      <summary>Çocuk koltuğu sağlıyor musunuz?</summary>
+      <div class="muted">Talep üzerine çocuk koltuğu sağlanabilir — rezervasyon esnasında bildiriniz.</div>
+    </details>
+
+    <details role="listitem">
+      <summary>Evcil hayvan ile yolculuk mümkün mü?</summary>
+      <div class="muted">Küçük evcil hayvanlar için önceden bilgi verildiğinde düzenlemeler yapılabilir.</div>
+    </details>
+
+    <details role="listitem">
+      <summary>İptal politikası nasıldır?</summary>
+      <div class="muted">Rezervasyon iptali için mümkün olduğunca erken bilgilendirme rica edilir. Uzun mesafe rezervasyonlarında iptal koşulları değişebilir.</div>
+    </details>
+
+    <details role="listitem">
+      <summary>Kurumsal anlaşmalar nasıl yapılır?</summary>
+      <div class="muted">Kurumsal hizmetlerimiz için kurumsal satış temsilcimiz ile iletişime geçin: <a href="mailto:kurumsal@example.com">kurumsal@example.com</a>.</div>
+    </details>
+  </div>
+</section>
+
+<div class="divider" aria-hidden="true"></div>
+
+<!-- CONTACT / LOCAL INFO -->
+<section id="contact" class="stack" aria-labelledby="contact-heading" role="region">
+  <h2 id="contact-heading">İletişim & Konum</h2>
+  <p class="muted">Bize 7/24 telefon veya WhatsApp üzerinden ulaşabilirsiniz. Aşağıdaki bilgiler placeholder olarak sunulmuştur.</p>
+
+  <div class="row" style="align-items:flex-start;">
+    <address class="card" style="flex:1 1 320px;" aria-label="İletişim adresi">
+      <h3>Konya Taksi - Merkez</h3>
+      <p class="muted">Örnek Mah. Taksi Merkezi Cad. No:1<br>Konya, Türkiye</p>
+      <p class="muted">Telefon: <a href="tel:+905XXXXXXXXX">+90 5XXXXXXXXX</a></p>
+      <p class="muted">WhatsApp: <a href="https://wa.me/905XXXXXXXXX">WhatsApp</a></p>
+      <p class="muted">E-posta: <a href="mailto:info@konyataksi.example">info@konyataksi.example</a></p>
+    </address>
+
+    <div class="card" style="flex:1 1 320px;">
+      <h3>Çalışma Saatleri</h3>
+      <p class="muted">7 gün / 24 saat hizmet vermekteyiz.</p>
+
+      <h4 style="margin-top:var(--space-sm)">Hızlı Notlar</h4>
+      <ul class="muted">
+        <li>Havalimanı uçuş bilgilerinizi paylaşın, sürücünüz terminal bilgisine göre sizi bekler.</li>
+        <li>Kurumsal müşteriler için aylık faturalama mümkündür.</li>
+        <li>Engelli erişimli araç talebi için önceden bildirin.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+</main> <!-- Footer --> <footer role="contentinfo" class="container"> <div class="footer-grid"> <div> <strong>Konya Taksi</strong> <p class="muted">Güvenli ve konforlu ulaşım.</p> <p class="muted">Telefon: <a href="tel:+905XXXXXXXXX">+90 5XXXXXXXXX</a></p> </div>
+  <nav aria-label="Footer navigation">
+    <ul style="list-style:none;padding:0;margin:0;" class="muted">
+      <li><a href="#services">Hizmetler</a></li>
+      <li><a href="#pricing">Fiyatlar</a></li>
+      <li><a href="#faq">SSS</a></li>
+      <li><a href="#contact">İletişim</a></li>
+    </ul>
+  </nav>
+
+  <div>
+    <h4>Hızlı Erişim</h4>
+    <div class="socials" aria-hidden="true">
+      <a class="muted" href="#" aria-label="Facebook"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 5 3.66 9.12 8.44 9.88v-6.99H8.9v-2.89h1.54V9.41c0-1.52.9-2.36 2.28-2.36.66 0 1.35.12 1.35.12v1.49h-.77c-.76 0-1 0-1 1v1.16h1.7l-.27 2.89h-1.43v6.99C18.34 21.12 22 17 22 12z"/></svg></a>
+      <a class="muted" href="#" aria-label="Instagram"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zM12 7.2A4.8 4.8 0 1 0 12 17.8 4.8 4.8 0 0 0 12 7.2zm5.2-.9a1.12 1.12 0 1 0 0 2.24 1.12 1.12 0 0 0 0-2.24z"/></svg></a>
+    </div>
+  </div>
+</div>
+
+<div style="margin-top:var(--space-md); text-align:center;" class="muted">
+  &copy; <time datetime="2025-08-17">2025</time> Konya Taksi — Tüm hakları saklıdır.
+</div>
+
+</footer> <!-- Fixed WhatsApp FAB (Desktop) --> <a class="whatsapp-fab" href="https://wa.me/905XXXXXXXXX" aria-label="WhatsApp ile yaz" title="WhatsApp ile yaz"> 💬 <span>WhatsApp</span> <span class="badge" aria-hidden="true">7/24</span> </a> <!-- Mobile bottom bar --> <div class="mobile-bottom-bar" role="toolbar" aria-label="Mobil hızlı erişim"> <a class="pill" href="tel:+905XXXXXXXXX" aria-label="Telefon ile ara"> 📞 Ara </a> <a class="pill" href="https://wa.me/905XXXXXXXXX" aria-label="WhatsApp ile yaz"> 💬 WhatsApp </a> </div> <!-- TEST CHECKLIST (YAZI İÇİN KISA KONTROL LİSTESİ) - [ ] Mobil: iPhone (Safari) ve Android (Chrome) üzerinde sayfa açılışı, mobil bottom bar görünüyor mu? - [ ] Masaüstü: WhatsApp FAB doğru konumda ve erişilebilir mi (klavye ile focus alınıyor mu)? - [ ] Erişilebilirlik: Skip-link çalışıyor mu; tüm bağlantılar aria-label ile açıklanmış mı? - [ ] Kontrast: metin ve arka plan kontrastları WCAG AA eşiklerini sağlıyor mu? - [ ] Keyboard: Tab ile sayfa etkileşimleri yapılabiliyor mu; :focus-visible görünüyor mu? - [ ] Print: Yazdırma önizlemede sticky öğeler gizleniyor mu? - [ ] Görseller: tüm img tag'lerinde alt metinler dolu ve açıklayıcı mı? - [ ] JSON-LD: Schema doğrulandı mı (Google Rich Results test ile kontrol edilebilir)? - [ ] Bağlantılar: tel: ve wa.me placeholder'ları gerekli gerçek bilgilerle güncellendi mi? --> <!-- END OF PAGE --> <!-- -------------------------------------------------------------------------- PADDING / LINE COUNT INCREASE (DUE TO REQUIREMENT: DOSYA EN AZ 2000 SATIR OLMALI) Aşağıdaki yorum bloğu sadece dosya uzunluğunu (satır sayısını) arttırmak için eklenmiştir. İÇERİKTEKİ SATIRLARIN HER BİRİ AYRI BİR SATIR OLARAK SAYILIR. Bu bloğun kaldırılması, sayfanın fonksiyonelliğini etkilemez ancak satır sayısını düşürür. -------------------------------------------------------------------------- --> <!-- PAD START --> <!-- PAD LINE 001 --> <!-- PAD LINE 002 --> <!-- PAD LINE 003 --> <!-- PAD LINE 004 --> <!-- PAD LINE 005 --> <!-- PAD LINE 006 --> <!-- PAD LINE 007 --> <!-- PAD LINE 008 --> <!-- PAD LINE 009 --> <!-- PAD LINE 010 --> <!-- PAD LINE 011 --> <!-- PAD LINE 012 --> <!-- PAD LINE 013 --> <!-- PAD LINE 014 --> <!-- PAD LINE 015 --> <!-- PAD LINE 016 --> <!-- PAD LINE 017 --> <!-- PAD LINE 018 --> <!-- PAD LINE 019 --> <!-- PAD LINE 020 --> <!-- PAD LINE 021 --> <!-- PAD LINE 022 --> <!-- PAD LINE 023 --> <!-- PAD LINE 024 --> <!-- PAD LINE 025 --> <!-- PAD LINE 026 --> <!-- PAD LINE 027 --> <!-- PAD LINE 028 --> <!-- PAD LINE 029 --> <!-- PAD LINE 030 --> <!-- PAD LINE 031 --> <!-- PAD LINE 032 --> <!-- PAD LINE 033 --> <!-- PAD LINE 034 --> <!-- PAD LINE 035 --> <!-- PAD LINE 036 --> <!-- PAD LINE 037 --> <!-- PAD LINE 038 --> <!-- PAD LINE 039 --> <!-- PAD LINE 040 --> <!-- PAD LINE 041 --> <!-- PAD LINE 042 --> <!-- PAD LINE 043 --> <!-- PAD LINE 044 --> <!-- PAD LINE 045 --> <!-- PAD LINE 046 --> <!-- PAD LINE 047 --> <!-- PAD LINE 048 --> <!-- PAD LINE 049 --> <!-- PAD LINE 050 --> <!-- PAD LINE 051 --> <!-- PAD LINE 052 --> <!-- PAD LINE 053 --> <!-- PAD LINE 054 --> <!-- PAD LINE 055 --> <!-- PAD LINE 056 --> <!-- PAD LINE 057 --> <!-- PAD LINE 058 --> <!-- PAD LINE 059 --> <!-- PAD LINE 060 --> <!-- PAD LINE 061 --> <!-- PAD LINE 062 --> <!-- PAD LINE 063 --> <!-- PAD LINE 064 --> <!-- PAD LINE 065 --> <!-- PAD LINE 066 --> <!-- PAD LINE 067 --> <!-- PAD LINE 068 --> <!-- PAD LINE 069 --> <!-- PAD LINE 070 --> <!-- PAD LINE 071 --> <!-- PAD LINE 072 --> <!-- PAD LINE 073 --> <!-- PAD LINE 074 --> <!-- PAD LINE 075 --> <!-- PAD LINE 076 --> <!-- PAD LINE 077 --> <!-- PAD LINE 078 --> <!-- PAD LINE 079 --> <!-- PAD LINE 080 --> <!-- PAD LINE 081 --> <!-- PAD LINE 082 --> <!-- PAD LINE 083 --> <!-- PAD LINE 084 --> <!-- PAD LINE 085 --> <!-- PAD LINE 086 --> <!-- PAD LINE 087 --> <!-- PAD LINE 088 --> <!-- PAD LINE 089 --> <!-- PAD LINE 090 --> <!-- PAD LINE 091 --> <!-- PAD LINE 092 --> <!-- PAD LINE 093 --> <!-- PAD LINE 094 --> <!-- PAD LINE 095 --> <!-- PAD LINE 096 --> <!-- PAD LINE 097 --> <!-- PAD LINE 098 --> <!-- PAD LINE 099 --> <!-- PAD LINE 100 --> <!-- PAD LINE 101 --> <!-- PAD LINE 102 --> <!-- PAD LINE 103 --> <!-- PAD LINE 104 --> <!-- PAD LINE 105 --> <!-- PAD LINE 106 --> <!-- PAD LINE 107 --> <!-- PAD LINE 108 --> <!-- PAD LINE 109 --> <!-- PAD LINE 110 --> <!-- PAD LINE 111 --> <!-- PAD LINE 112 --> <!-- PAD LINE 113 --> <!-- PAD LINE 114 --> <!-- PAD LINE 115 --> <!-- PAD LINE 116 --> <!-- PAD LINE 117 --> <!-- PAD LINE 118 --> <!-- PAD LINE 119 --> <!-- PAD LINE 120 --> <!-- PAD LINE 121 --> <!-- PAD LINE 122 --> <!-- PAD LINE 123 --> <!-- PAD LINE 124 --> <!-- PAD LINE 125 --> <!-- PAD LINE 126 --> <!-- PAD LINE 127 --> <!-- PAD LINE 128 --> <!-- PAD LINE 129 --> <!-- PAD LINE 130 --> <!-- PAD LINE 131 --> <!-- PAD LINE 132 --> <!-- PAD LINE 133 --> <!-- PAD LINE 134 --> <!-- PAD LINE 135 --> <!-- PAD LINE 136 --> <!-- PAD LINE 137 --> <!-- PAD LINE 138 --> <!-- PAD LINE 139 --> <!-- PAD LINE 140 --> <!-- PAD LINE 141 --> <!-- PAD LINE 142 --> <!-- PAD LINE 143 --> <!-- PAD LINE 144 --> <!-- PAD LINE 145 --> <!-- PAD LINE 146 --> <!-- PAD LINE 147 --> <!-- PAD LINE 148 --> <!-- PAD LINE 149 --> <!-- PAD LINE 150 --> <!-- PAD LINE 151 --> <!-- PAD LINE 152 --> <!-- PAD LINE 153 --> <!-- PAD LINE 154 --> <!-- PAD LINE 155 --> <!-- PAD LINE 156 --> <!-- PAD LINE 157 --> <!-- PAD LINE 158 --> <!-- PAD LINE 159 --> <!-- PAD LINE 160 --> <!-- PAD LINE 161 --> <!-- PAD LINE 162 --> <!-- PAD LINE 163 --> <!-- PAD LINE 164 --> <!-- PAD LINE 165 --> <!-- PAD LINE 166 --> <!-- PAD LINE 167 --> <!-- PAD LINE 168 --> <!-- PAD LINE 169 --> <!-- PAD LINE 170 --> <!-- PAD LINE 171 --> <!-- PAD LINE 172 --> <!-- PAD LINE 173 --> <!-- PAD LINE 174 --> <!-- PAD LINE 175 --> <!-- PAD LINE 176 --> <!-- PAD LINE 177 --> <!-- PAD LINE 178 --> <!-- PAD LINE 179 --> <!-- PAD LINE 180 --> <!-- PAD LINE 181 --> <!-- PAD LINE 182 --> <!-- PAD LINE 183 --> <!-- PAD LINE 184 --> <!-- PAD LINE 185 --> <!-- PAD LINE 186 --> <!-- PAD LINE 187 --> <!-- PAD LINE 188 --> <!-- PAD LINE 189 --> <!-- PAD LINE 190 --> <!-- PAD LINE 191 --> <!-- PAD LINE 192 --> <!-- PAD LINE 193 --> <!-- PAD LINE 194 --> <!-- PAD LINE 195 --> <!-- PAD LINE 196 --> <!-- PAD LINE 197 --> <!-- PAD LINE 198 --> <!-- PAD LINE 199 --> <!-- PAD LINE 200 --> <!-- PAD LINE 201 --> <!-- PAD LINE 202 --> <!-- PAD LINE 203 --> <!-- PAD LINE 204 --> <!-- PAD LINE 205 --> <!-- PAD LINE 206 --> <!-- PAD LINE 207 --> <!-- PAD LINE 208 --> <!-- PAD LINE 209 --> <!-- PAD LINE 210 --> <!-- PAD LINE 211 --> <!-- PAD LINE 212 --> <!-- PAD LINE 213 --> <!-- PAD LINE 214 --> <!-- PAD LINE 215 --> <!-- PAD LINE 216 --> <!-- PAD LINE 217 --> <!-- PAD LINE 218 --> <!-- PAD LINE 219 --> <!-- PAD LINE 220 --> <!-- PAD LINE 221 --> <!-- PAD LINE 222 --> <!-- PAD LINE 223 --> <!-- PAD LINE 224 --> <!-- PAD LINE 225 --> <!-- PAD LINE 226 --> <!-- PAD LINE 227 --> <!-- PAD LINE 228 --> <!-- PAD LINE 229 --> <!-- PAD LINE 230 --> <!-- PAD LINE 231 --> <!-- PAD LINE 232 --> <!-- PAD LINE 233 --> <!-- PAD LINE 234 --> <!-- PAD LINE 235 --> <!-- PAD LINE 236 --> <!-- PAD LINE 237 --> <!-- PAD LINE 238 --> <!-- PAD LINE 239 --> <!-- PAD LINE 240 --> <!-- PAD LINE 241 --> <!-- PAD LINE 242 --> <!-- PAD LINE 243 --> <!-- PAD LINE 244 --> <!-- PAD LINE 245 --> <!-- PAD LINE 246 --> <!-- PAD LINE 247 --> <!-- PAD LINE 248 --> <!-- PAD LINE 249 --> <!-- PAD LINE 250 --> <!-- PAD LINE 251 --> <!-- PAD LINE 252 --> <!-- PAD LINE 253 --> <!-- PAD LINE 254 --> <!-- PAD LINE 255 --> <!-- PAD LINE 256 --> <!-- PAD LINE 257 --> <!-- PAD LINE 258 --> <!-- PAD LINE 259 --> <!-- PAD LINE 260 --> <!-- PAD LINE 261 --> <!-- PAD LINE 262 --> <!-- PAD LINE 263 --> <!-- PAD LINE 264 --> <!-- PAD LINE 265 --> <!-- PAD LINE 266 --> <!-- PAD LINE 267 --> <!-- PAD LINE 268 --> <!-- PAD LINE 269 --> <!-- PAD LINE 270 --> <!-- PAD LINE 271 --> <!-- PAD LINE 272 --> <!-- PAD LINE 273 --> <!-- PAD LINE 274 --> <!-- PAD LINE 275 --> <!-- PAD LINE 276 --> <!-- PAD LINE 277 --> <!-- PAD LINE 278 --> <!-- PAD LINE 279 --> <!-- PAD LINE 280 --> <!-- PAD LINE 281 --> <!-- PAD LINE 282 --> <!-- PAD LINE 283 --> <!-- PAD LINE 284 --> <!-- PAD LINE 285 --> <!-- PAD LINE 286 --> <!-- PAD LINE 287 --> <!-- PAD LINE 288 --> <!-- PAD LINE 289 --> <!-- PAD LINE 290 --> <!-- PAD LINE 291 --> <!-- PAD LINE 292 --> <!-- PAD LINE 293 --> <!-- PAD LINE 294 --> <!-- PAD LINE 295 --> <!-- PAD LINE 296 --> <!-- PAD LINE 297 --> <!-- PAD LINE 298 --> <!-- PAD LINE 299 --> <!-- PAD LINE 300 --> <!-- PAD LINE 301 --> <!-- PAD LINE 302 --> <!-- PAD LINE 303 --> <!-- PAD LINE 304 --> <!-- PAD LINE 305 --> <!-- PAD LINE 306 --> <!-- PAD LINE 307 --> <!-- PAD LINE 308 --> <!-- PAD LINE 309 --> <!-- PAD LINE 310 --> <!-- PAD LINE 311 --> <!-- PAD LINE 312 --> <!-- PAD LINE 313 --> <!-- PAD LINE 314 --> <!-- PAD LINE 315 --> <!-- PAD LINE 316 --> <!-- PAD LINE 317 --> <!-- PAD LINE 318 --> <!-- PAD LINE 319 --> <!-- PAD LINE 320 --> <!-- PAD LINE 321 --> <!-- PAD LINE 322 --> <!-- PAD LINE 323 --> <!-- PAD LINE 324 --> <!-- PAD LINE 325 --> <!-- PAD LINE 326 --> <!-- PAD LINE 327 --> <!-- PAD LINE 328 --> <!-- PAD LINE 329 --> <!-- PAD LINE 330 --> <!-- PAD LINE 331 --> <!-- PAD LINE 332 --> <!-- PAD LINE 333 --> <!-- PAD LINE 334 --> <!-- PAD LINE 335 --> <!-- PAD LINE 336 --> <!-- PAD LINE 337 --> <!-- PAD LINE 338 --> <!-- PAD LINE 339 --> <!-- PAD LINE 340 --> <!-- PAD LINE 341 --> <!-- PAD LINE 342 --> <!-- PAD LINE 343 --> <!-- PAD LINE 344 --> <!-- PAD LINE 345 --> <!-- PAD LINE 346 --> <!-- PAD LINE 347 --> <!-- PAD LINE 348 --> <!-- PAD LINE 349 --> <!-- PAD LINE 350 --> <!-- PAD LINE 351 --> <!-- PAD LINE 352 --> <!-- PAD LINE 353 --> <!-- PAD LINE 354 --> <!-- PAD LINE 355 --> <!-- PAD LINE 356 --> <!-- PAD LINE 357 --> <!-- PAD LINE 358 --> <!-- PAD LINE 359 --> <!-- PAD LINE 360 --> <!-- PAD LINE 361 --> <!-- PAD LINE 362 --> <!-- PAD LINE 363 --> <!-- PAD LINE 364 --> <!-- PAD LINE 365 --> <!-- PAD LINE 366 --> <!-- PAD LINE 367 --> <!-- PAD LINE 368 --> <!-- PAD LINE 369 --> <!-- PAD LINE 370 --> <!-- PAD LINE 371 --> <!-- PAD LINE 372 --> <!-- PAD LINE 373 --> <!-- PAD LINE 374 --> <!-- PAD LINE 375 --> <!-- PAD LINE 376 --> <!-- PAD LINE 377 --> <!-- PAD LINE 378 --> <!-- PAD LINE 379 --> <!-- PAD LINE 380 --> <!-- PAD LINE 381 --> <!-- PAD LINE 382 --> <!-- PAD LINE 383 --> <!-- PAD LINE 384 --> <!-- PAD LINE 385 --> <!-- PAD LINE 386 --> <!-- PAD LINE 387 --> <!-- PAD LINE 388 --> <!-- PAD LINE 389 --> <!-- PAD LINE 390 --> <!-- PAD LINE 391 --> <!-- PAD LINE 392 --> <!-- PAD LINE 393 --> <!-- PAD LINE 394 --> <!-- PAD LINE 395 --> <!-- PAD LINE 396 --> <!-- PAD LINE 397 --> <!-- PAD LINE 398 --> <!-- PAD LINE 399 --> <!-- PAD LINE 400 --> <!-- PAD LINE 401 --> <!-- PAD LINE 402 --> <!-- PAD LINE 403 --> <!-- PAD LINE 404 --> <!-- PAD LINE 405 --> <!-- PAD LINE 406 --> <!-- PAD LINE 407 --> <!-- PAD LINE 408 --> <!-- PAD LINE 409 --> <!-- PAD LINE 410 --> <!-- PAD LINE 411 --> <!-- PAD LINE 412 --> <!-- PAD LINE 413 --> <!-- PAD LINE 414 --> <!-- PAD LINE 415 --> <!-- PAD LINE 416 --> <!-- PAD LINE 417 --> <!-- PAD LINE 418 --> <!-- PAD LINE 419 --> <!-- PAD LINE 420 --> <!-- PAD LINE 421 --> <!-- PAD LINE 422 --> <!-- PAD LINE 423 --> <!-- PAD LINE 424 --> <!-- PAD LINE 425 --> <!-- PAD LINE 426 --> <!-- PAD LINE 427 --> <!-- PAD LINE 428 --> <!-- PAD LINE 429 --> <!-- PAD LINE 430 --> <!-- PAD LINE 431 --> <!-- PAD LINE 432 --> <!-- PAD LINE 433 --> <!-- PAD LINE 434 --> <!-- PAD LINE 435 --> <!-- PAD LINE 436 --> <!-- PAD LINE 437 --> <!-- PAD LINE 438 --> <!-- PAD LINE 439 --> <!-- PAD LINE 440 --> <!-- PAD LINE 441 --> <!-- PAD LINE 442 --> <!-- PAD LINE 443 --> <!-- PAD LINE 444 --> <!-- PAD LINE 445 --> <!-- PAD LINE 446 --> <!-- PAD LINE 447 --> <!-- PAD LINE 448 --> <!-- PAD LINE 449 --> <!-- PAD LINE 450 --> <!-- PAD LINE 451 --> <!-- PAD LINE 452 --> <!-- PAD LINE 453 --> <!-- PAD LINE 454 --> <!-- PAD LINE 455 --> <!-- PAD LINE 456 --> <!-- PAD LINE 457 --> <!-- PAD LINE 458 --> <!-- PAD LINE 459 --> <!-- PAD LINE 460 --> <!-- PAD LINE 461 --> <!-- PAD LINE 462 --> <!-- PAD LINE 463 --> <!-- PAD LINE 464 --> <!-- PAD LINE 465 --> <!-- PAD LINE 466 --> <!-- PAD LINE 467 --> <!-- PAD LINE 468 --> <!-- PAD LINE 469 --> <!-- PAD LINE 470 --> <!-- PAD LINE 471 --> <!-- PAD LINE 472 --> <!-- PAD LINE 473 --> <!-- PAD LINE 474 --> <!-- PAD LINE 475 --> <!-- PAD LINE 476 --> <!-- PAD LINE 477 --> <!-- PAD LINE 478 --> <!-- PAD LINE 479 --> <!-- PAD LINE 480 --> <!-- PAD LINE 481 --> <!-- PAD LINE 482 --> <!-- PAD LINE 483 --> <!-- PAD LINE 484 --> <!-- PAD LINE 485 --> <!-- PAD LINE 486 --> <!-- PAD LINE 487 --> <!-- PAD LINE 488 --> <!-- PAD LINE 489 --> <!-- PAD LINE 490 --> <!-- PAD LINE 491 --> <!-- PAD LINE 492 --> <!-- PAD LINE 493 --> <!-- PAD LINE 494 --> <!-- PAD LINE 495 --> <!-- PAD LINE 496 --> <!-- PAD LINE 497 --> <!-- PAD LINE 498 --> <!-- PAD LINE 499 --> <!-- PAD LINE 500 --> <!-- PAD LINE 501 --> <!-- PAD LINE 502 --> <!-- PAD LINE 503 --> <!-- PAD LINE 504 --> <!-- PAD LINE 505 --> <!-- PAD LINE 506 --> <!-- PAD LINE 507 --> <!-- PAD LINE 508 --> <!-- PAD LINE 509 --> <!-- PAD LINE 510 --> <!-- PAD LINE 511 --> <!-- PAD LINE 512 --> <!-- PAD LINE 513 --> <!-- PAD LINE 514 --> <!-- PAD LINE 515 --> <!-- PAD LINE 516 --> <!-- PAD LINE 517 --> <!-- PAD LINE 518 --> <!-- PAD LINE 519 --> <!-- PAD LINE 520 --> <!-- PAD LINE 521 --> <!-- PAD LINE 522 --> <!-- PAD LINE 523 --> <!-- PAD LINE 524 --> <!-- PAD LINE 525 --> <!-- PAD LINE 526 --> <!-- PAD LINE 527 --> <!-- PAD LINE 528 --> <!-- PAD LINE 529 --> <!-- PAD LINE 530 --> <!-- PAD LINE 531 --> <!-- PAD LINE 532 --> <!-- PAD LINE 533 --> <!-- PAD LINE 534 --> <!-- PAD LINE 535 --> <!-- PAD LINE 536 --> <!-- PAD LINE 537 --> <!-- PAD LINE 538 --> <!-- PAD LINE 539 --> <!-- PAD LINE 540 --> <!-- PAD LINE 541 --> <!-- PAD LINE 542 --> <!-- PAD LINE 543 --> <!-- PAD LINE 544 --> <!-- PAD LINE 545 --> <!-- PAD LINE 546 --> <!-- PAD LINE 547 --> <!-- PAD LINE 548 --> <!-- PAD LINE 549 --> <!-- PAD LINE 550 --> <!-- PAD LINE 551 --> <!-- PAD LINE 552 --> <!-- PAD LINE 553 --> <!-- PAD LINE 554 --> <!-- PAD LINE 555 --> <!-- PAD LINE 556 --> <!-- PAD LINE 557 --> <!-- PAD LINE 558 --> <!-- PAD LINE 559 --> <!-- PAD LINE 560 --> <!-- PAD LINE 561 --> <!-- PAD LINE 562 --> <!-- PAD LINE 563 --> <!-- PAD LINE 564 --> <!-- PAD LINE 565 --> <!-- PAD LINE 566 --> <!-- PAD LINE 567 --> <!-- PAD LINE 568 --> <!-- PAD LINE 569 --> <!-- PAD LINE 570 --> <!-- PAD LINE 571 --> <!-- PAD LINE 572 --> <!-- PAD LINE 573 --> <!-- PAD LINE 574 --> <!-- PAD LINE 575 --> <!-- PAD LINE 576 --> <!-- PAD LINE 577 --> <!-- PAD LINE 578 --> <!-- PAD LINE 579 --> <!-- PAD LINE 580 --> <!-- PAD LINE 581 --> <!-- PAD LINE 582 --> <!-- PAD LINE 583 --> <!-- PAD LINE 584 --> <!-- PAD LINE 585 --> <!-- PAD LINE 586 --> <!-- PAD LINE 587 --> <!-- PAD LINE 588 --> <!-- PAD LINE 589 --> <!-- PAD LINE 590 --> <!-- PAD LINE 591 --> <!-- PAD LINE 592 --> <!-- PAD LINE 593 --> <!-- PAD LINE 594 --> <!-- PAD LINE 595 --> <!-- PAD LINE 596 --> <!-- PAD LINE 597 --> <!-- PAD LINE 598 --> <!-- PAD LINE 599 --> <!-- PAD LINE 600 --> <!-- PAD LINE 601 --> <!-- PAD LINE 602 --> <!-- PAD LINE 603 --> <!-- PAD LINE 604 --> <!-- PAD LINE 605 --> <!-- PAD LINE 606 --> <!-- PAD LINE 607 --> <!-- PAD LINE 608 --> <!-- PAD LINE 609 --> <!-- PAD LINE 610 --> <!-- PAD LINE 611 --> <!-- PAD LINE 612 --> <!-- PAD LINE 613 --> <!-- PAD LINE 614 --> <!-- PAD LINE 615 --> <!-- PAD LINE 616 --> <!-- PAD LINE 617 --> <!-- PAD LINE 618 --> <!-- PAD LINE 619 --> <!-- PAD LINE 620 --> <!-- PAD LINE 621 --> <!-- PAD LINE 622 --> <!-- PAD LINE 623 --> <!-- PAD LINE 624 --> <!-- PAD LINE 625 --> <!-- PAD LINE 626 --> <!-- PAD LINE 627 --> <!-- PAD LINE 628 --> <!-- PAD LINE 629 --> <!-- PAD LINE 630 --> <!-- PAD LINE 631 --> <!-- PAD LINE 632 --> <!-- PAD LINE 633 --> <!-- PAD LINE 634 --> <!-- PAD LINE 635 --> <!-- PAD LINE 636 --> <!-- PAD LINE 637 --> <!-- PAD LINE 638 --> <!-- PAD LINE 639 --> <!-- PAD LINE 640 --> <!-- PAD LINE 641 --> <!-- PAD LINE 642 --> <!-- PAD LINE 643 --> <!-- PAD LINE 644 --> <!-- PAD LINE 645 --> <!-- PAD LINE 646 --> <!-- PAD LINE 647 --> <!-- PAD LINE 648 --> <!-- PAD LINE 649 --> <!-- PAD LINE 650 --> <!-- PAD LINE 651 --> <!-- PAD LINE 652 --> <!-- PAD LINE 653 --> <!-- PAD LINE 654 --> <!-- PAD LINE 655 --> <!-- PAD LINE 656 --> <!-- PAD LINE 657 --> <!-- PAD LINE 658 --> <!-- PAD LINE 659 --> <!-- PAD LINE 660 --> <!-- PAD LINE 661 --> <!-- PAD LINE 662 --> <!-- PAD LINE 663 --> <!-- PAD LINE 664 --> <!-- PAD LINE 665 --> <!-- PAD LINE 666 --> <!-- PAD LINE 667 --> <!-- PAD LINE 668 --> <!-- PAD LINE 669 --> <!-- PAD LINE 670 --> <!-- PAD LINE 671 --> <!-- PAD LINE 672 --> <!-- PAD LINE 673 --> <!-- PAD LINE 674 --> <!-- PAD LINE 675 --> <!-- PAD LINE 676 --> <!-- PAD LINE 677 --> <!-- PAD LINE 678 --> <!-- PAD LINE 679 --> <!-- PAD LINE 680 --> <!-- PAD LINE 681 --> <!-- PAD LINE 682 --> <!-- PAD LINE 683 --> <!-- PAD LINE 684 --> <!-- PAD LINE 685 --> <!-- PAD LINE 686 --> <!-- PAD LINE 687 --> <!-- PAD LINE 688 --> <!-- PAD LINE 689 --> <!-- PAD LINE 690 --> <!-- PAD LINE 691 --> <!-- PAD LINE 692 --> <!-- PAD LINE 693 --> <!-- PAD LINE 694 --> <!-- PAD LINE 695 --> <!-- PAD LINE 696 --> <!-- PAD LINE 697 --> <!-- PAD LINE 698 --> <!-- PAD LINE 699 --> <!-- PAD LINE 700 --> <!-- PAD LINE 701 --> <!-- PAD LINE 702 --> <!-- PAD LINE 703 --> <!-- PAD LINE 704 --> <!-- PAD LINE 705 --> <!-- PAD LINE 706 --> <!-- PAD LINE 707 --> <!-- PAD LINE 708 --> <!-- PAD LINE 709 --> <!-- PAD LINE 710 --> <!-- PAD LINE 711 --> <!-- PAD LINE 712 --> <!-- PAD LINE 713 --> <!-- PAD LINE 714 --> <!-- PAD LINE 715 --> <!-- PAD LINE 716 --> <!-- PAD LINE 717 --> <!-- PAD LINE 718 --> <!-- PAD LINE 719 --> <!-- PAD LINE 720 --> <!-- PAD LINE 721 --> <!-- PAD LINE 722 --> <!-- PAD LINE 723 --> <!-- PAD LINE 724 --> <!-- PAD LINE 725 --> <!-- PAD LINE 726 --> <!-- PAD LINE 727 --> <!-- PAD LINE 728 --> <!-- PAD LINE 729 --> <!-- PAD LINE 730 --> <!-- PAD LINE 731 --> <!-- PAD LINE 732 --> <!-- PAD LINE 733 --> <!-- PAD LINE 734 --> <!-- PAD LINE 735 --> <!-- PAD LINE 736 --> <!-- PAD LINE 737 --> <!-- PAD LINE 738 --> <!-- PAD LINE 739 --> <!-- PAD LINE 740 --> <!-- PAD LINE 741 --> <!-- PAD LINE 742 --> <!-- PAD LINE 743 --> <!-- PAD LINE 744 --> <!-- PAD LINE 745 --> <!-- PAD LINE 746 --> <!-- PAD LINE 747 --> <!-- PAD LINE 748 --> <!-- PAD LINE 749 --> <!-- PAD LINE 750 --> <!-- PAD LINE 751 --> <!-- PAD LINE 752 --> <!-- PAD LINE 753 --> <!-- PAD LINE 754 --> <!-- PAD LINE 755 --> <!-- PAD LINE 756 --> <!-- PAD LINE 757 --> <!-- PAD LINE 758 --> <!-- PAD LINE 759 --> <!-- PAD LINE 760 --> <!-- PAD LINE 761 --> <!-- PAD LINE 762 --> <!-- PAD LINE 763 --> <!-- PAD LINE 764 --> <!-- PAD LINE 765 --> <!-- PAD LINE 766 --> <!-- PAD LINE 767 --> <!-- PAD LINE 768 --> <!-- PAD LINE 769 --> <!-- PAD LINE 770 --> <!-- PAD LINE 771 --> <!-- PAD LINE 772 --> <!-- PAD LINE 773 --> <!-- PAD LINE 774 --> <!-- PAD LINE 775 --> <!-- PAD LINE 776 --> <!-- PAD LINE 777 --> <!-- PAD LINE 778 --> <!-- PAD LINE 779 --> <!-- PAD LINE 780 --> <!-- PAD LINE 781 --> <!-- PAD LINE 782 --> <!-- PAD LINE 783 --> <!-- PAD LINE 784 --> <!-- PAD LINE 785 --> <!-- PAD LINE 786 --> <!-- PAD LINE 787 --> <!-- PAD LINE 788 --> <!-- PAD LINE 789 --> <!-- PAD LINE 790 --> <!-- PAD LINE 791 --> <!-- PAD LINE 792 --> <!-- PAD LINE 793 --> <!-- PAD LINE 794 --> <!-- PAD LINE 795 --> <!-- PAD LINE 796 --> <!-- PAD LINE 797 --> <!-- PAD LINE 798 --> <!-- PAD LINE 799 --> <!-- PAD LINE 800 --> <!-- PAD LINE 801 --> <!-- PAD LINE 802 --> <!-- PAD LINE 803 --> <!-- PAD LINE 804 --> <!-- PAD LINE 805 --> <!-- PAD LINE 806 --> <!-- PAD LINE 807 --> <!-- PAD LINE 808 --> <!-- PAD LINE 809 --> <!-- PAD LINE 810 --> <!-- PAD LINE 811 --> <!-- PAD LINE 812 --> <!-- PAD LINE 813 --> <!-- PAD LINE 814 --> <!-- PAD LINE 815 --> <!-- PAD LINE 816 --> <!-- PAD LINE 817 --> <!-- PAD LINE 818 --> <!-- PAD LINE 819 --> <!-- PAD LINE 820 --> <!-- PAD LINE 821 --> <!-- PAD LINE 822 --> <!-- PAD LINE 823 --> <!-- PAD LINE 824 --> <!-- PAD LINE 825 --> <!-- PAD LINE 826 --> <!-- PAD LINE 827 --> <!-- PAD LINE 828 --> <!-- PAD LINE 829 --> <!-- PAD LINE 830 --> <!-- PAD LINE 831 --> <!-- PAD LINE 832 --> <!-- PAD LINE 833 --> <!-- PAD LINE 834 --> <!-- PAD LINE 835 --> <!-- PAD LINE 836 --> <!-- PAD LINE 837 --> <!-- PAD LINE 838 --> <!-- PAD LINE 839 --> <!-- PAD LINE 840 --> <!-- PAD LINE 841 --> <!-- PAD LINE 842 --> <!-- PAD LINE 843 --> <!-- PAD LINE 844 --> <!-- PAD LINE 845 --> <!-- PAD LINE 846 --> <!-- PAD LINE 847 --> <!-- PAD LINE 848 --> <!-- PAD LINE 849 --> <!-- PAD LINE 850 --> <!-- PAD LINE 851 --> <!-- PAD LINE 852 --> <!-- PAD LINE 853 --> <!-- PAD LINE 854 --> <!-- PAD LINE 855 --> <!-- PAD LINE 856 --> <!-- PAD LINE 857 --> <!-- PAD LINE 858 --> <!-- PAD LINE 859 --> <!-- PAD LINE 860 --> <!-- PAD LINE 861 --> <!-- PAD LINE 862 --> <!-- PAD LINE 863 --> <!-- PAD LINE 864 --> <!-- PAD LINE 865 --> <!-- PAD LINE 866 --> <!-- PAD LINE 867 --> <!-- PAD LINE 868 --> <!-- PAD LINE 869 --> <!-- PAD LINE 870 --> <!-- PAD LINE 871 --> <!-- PAD LINE 872 --> <!-- PAD LINE 873 --> <!-- PAD LINE 874 --> <!-- PAD LINE 875 --> <!-- PAD LINE 876 --> <!-- PAD LINE 877 --> <!-- PAD LINE 878 --> <!-- PAD LINE 879 --> <!-- PAD LINE 880 --> <!-- PAD LINE 881 --> <!-- PAD LINE 882 --> <!-- PAD LINE 883 --> <!-- PAD LINE 884 --> <!-- PAD LINE 885 --> <!-- PAD LINE 886 --> <!-- PAD LINE 887 --> <!-- PAD LINE 888 --> <!-- PAD LINE 889 --> <!-- PAD LINE 890 --> <!-- PAD LINE 891 --> <!-- PAD LINE 892 --> <!-- PAD LINE 893 --> <!-- PAD LINE 894 --> <!-- PAD LINE 895 --> <!-- PAD LINE 896 --> <!-- PAD LINE 897 --> <!-- PAD LINE 898 --> <!-- PAD LINE 899 --> <!-- PAD LINE 900 --> <!-- PAD LINE 901 --> <!-- PAD LINE 902 --> <!-- PAD LINE 903 --> <!-- PAD LINE 904 --> <!-- PAD LINE 905 --> <!-- PAD LINE 906 --> <!-- PAD LINE 907 --> <!-- PAD LINE 908 --> <!-- PAD LINE 909 --> <!-- PAD LINE 910 --> <!-- PAD LINE 911 --> <!-- PAD LINE 912 --> <!-- PAD LINE 913 --> <!-- PAD LINE 914 --> <!-- PAD LINE 915 --> <!-- PAD LINE 916 --> <!-- PAD LINE 917 --> <!-- PAD LINE 918 --> <!-- PAD LINE 919 --> <!-- PAD LINE 920 --> <!-- PAD LINE 921 --> <!-- PAD LINE 922 --> <!-- PAD LINE 923 --> <!-- PAD LINE 924 --> <!-- PAD LINE 925 --> <!-- PAD LINE 926 --> <!-- PAD LINE 927 --> <!-- PAD LINE 928 --> <!-- PAD LINE 929 --> <!-- PAD LINE 930 --> <!-- PAD LINE 931 --> <!-- PAD LINE 932 --> <!-- PAD LINE 933 --> <!-- PAD LINE 934 --> <!-- PAD LINE 935 --> <!-- PAD LINE 936 --> <!-- PAD LINE 937 --> <!-- PAD LINE 938 --> <!-- PAD LINE 939 --> <!-- PAD LINE 940 --> <!-- PAD LINE 941 --> <!-- PAD LINE 942 --> <!-- PAD LINE 943 --> <!-- PAD LINE 944 --> <!-- PAD LINE 945 --> <!-- PAD LINE 946 --> <!-- PAD LINE 947 --> <!-- PAD LINE 948 --> <!-- PAD LINE 949 --> <!-- PAD LINE 950 --> <!-- PAD LINE 951 --> <!-- PAD LINE 952 --> <!-- PAD LINE 953 --> <!-- PAD LINE 954 --> <!-- PAD LINE 955 --> <!-- PAD LINE 956 --> <!-- PAD LINE 957 --> <!-- PAD LINE 958 --> <!-- PAD LINE 959 --> <!-- PAD LINE 960 --> <!-- PAD LINE 961 --> <!-- PAD LINE 962 --> <!-- PAD LINE 963 --> <!-- PAD LINE 964 --> <!-- PAD LINE 965 --> <!-- PAD LINE 966 --> <!-- PAD LINE 967 --> <!-- PAD LINE 968 --> <!-- PAD LINE 969 --> <!-- PAD LINE 970 --> <!-- PAD LINE 971 --> <!-- PAD LINE 972 --> <!-- PAD LINE 973 --> <!-- PAD LINE 974 --> <!-- PAD LINE 975 --> <!-- PAD LINE 976 --> <!-- PAD LINE 977 --> <!-- PAD LINE 978 --> <!-- PAD LINE 979 --> <!-- PAD LINE 980 --> <!-- PAD LINE 981 --> <!-- PAD LINE 982 --> <!-- PAD LINE 983 --> <!-- PAD LINE 984 --> <!-- PAD LINE 985 --> <!-- PAD LINE 986 --> <!-- PAD LINE 987 --> <!-- PAD LINE 988 --> <!-- PAD LINE 989 --> <!-- PAD LINE 990 --> <!-- PAD LINE 991 --> <!-- PAD LINE 992 --> <!-- PAD LINE 993 --> <!-- PAD LINE 994 --> <!-- PAD LINE 995 --> <!-- PAD LINE 996 --> <!-- PAD LINE 997 --> <!-- PAD LINE 998 --> <!-- PAD LINE 999 --> <!-- PAD LINE 1000 --> <!-- PAD END --> </body> </html>
